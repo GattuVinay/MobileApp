@@ -1,0 +1,234 @@
+
+# HomeScreen: Main menu
+<HomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+        Label:
+            text: "Learn Automata, Formal Languages, and Grammars"
+            font_size: 24
+        Button:
+            text: "Automata"
+            on_press: app.select_category('automata'); app.root.current = 'automata'
+        Button:
+            text: "Formal Languages"
+            on_press: app.select_category('formal_languages'); app.root.current = 'automata'
+        Button:
+            text: "Grammars"
+            on_press: app.select_category('grammars'); app.root.current = 'automata'
+          
+# Automata Lessons
+<AutomataScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+        Label:
+            text: "Automata Lessons"
+            font_size: 20
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                Button:
+                    text: "1. Introduction to Automata"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.set_automata_detail("Introduction to Automata", "Automata are mathematical models ...")
+                Button:
+                    text: "2. Deterministic Finite Automata (DFA)"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.set_automata_detail("Deterministic Finite Automata (DFA)", "DFAs are ...")
+                Button:
+                    text: "3. Nondeterministic Finite Automata (NFA)"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.set_automata_detail("Nondeterministic Finite Automata (NFA)", "NFAs are ...")
+                Button:
+                    text: "4. Pushdown Automata (PDA)"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.set_automata_detail("Pushdown Automata (PDA)", "PDAs extend ...")
+                Button:
+                    text: "5. Turing Machines"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.set_automata_detail("Turing Machines", "Turing Machines are ...")
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            spacing: 10
+            Button:
+                text: "Back to Home"
+                on_press: app.root.current = 'home'
+            Button:
+                text: "Practice"
+                on_press: app.root.current = 'automata_practice'
+
+# Practice Screen
+<AutomataPracticeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+        Label:
+            id: question_label
+            text: "Question will appear here."
+            font_size: 20
+            halign: 'center'
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                Button:
+                    id: option_a
+                    text: "Option A"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('A')
+                Button:
+                    id: option_b
+                    text: "Option B"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('B')
+                Button:
+                    id: option_c
+                    text: "Option C"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('C')
+                Button:
+                    id: option_d
+                    text: "Option D"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('D')
+        Button:
+            text: "Back to Automata Lessons"
+            on_press: app.refresh_screen('automata')
+
+<AutomataDetailScreen>:
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+        Label:
+            id: title
+            text: "Automata Topic"
+            font_size: 24
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                Label:
+                    id: content
+                    text: "Detailed explanation of the topic will appear here."
+                    font_size: 16
+                    size_hint_y: None
+                    height: self.texture_size[1]
+        Button:
+            text: "Back to Automata Lessons"
+            on_press: app.root.current = 'automata'
+
+
+# Formal Languages Lessons
+<FormalLanguagesScreen>:
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+        Label:
+            text: "Formal Languages Lessons"
+            font_size: 20
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                Button:
+                    text: "1. Introduction to Formal Languages"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.set_formalLanguage_detail("Introduction to Formal Languages", "Formal Languages are mathematical models ...")
+                Button:
+                    text: "2. Deterministic Finite Automata (DFA)"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.set_formalLanguage_detail("Deterministic Finite Automata (DFA)", "DFAs are ...")
+                Button:
+                    text: "3. Nondeterministic Finite Automata (NFA)"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.set_formalLanguage_detail("Nondeterministic Finite Automata (NFA)", "NFAs are ...")
+                Button:
+                    text: "4. Pushdown Automata (PDA)"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.set_formalLanguage_detail("Pushdown Automata (PDA)", "PDAs extend ...")
+                Button:
+                    text: "5. Turing Machines"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.set_formalLanguage_detail("Turing Machines", "Turing Machines are ...")
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            spacing: 10
+            Button:
+                text: "Back to Home"
+                on_press: app.root.current = 'home'
+            Button:
+                text: "Practice"
+                on_press: app.root.current = 'automata_practice'
+
+
+# Grammars Lessons
+<GrammarsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+        Label:
+            text: "Grammars Lessons"
+            font_size: 20
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                Label:
+                    text: "1. Introduction to Grammars"
+                    size_hint_y: None
+                    height: 40
+                Label:
+                    text: "2. Regular Grammars"
+                    size_hint_y: None
+                    height: 40
+                Label:
+                    text: "3. Context-Free Grammars"
+                    size_hint_y: None
+                    height: 40
+                Label:
+                    text: "4. Derivation Trees"
+                    size_hint_y: None
+                    height: 40
+                Label:
+                    text: "5. Ambiguity in Grammars"
+                    size_hint_y: None
+                    height: 40
+        Button:
+            text: "Back to Home"
+            on_press: app.root.current = 'home'

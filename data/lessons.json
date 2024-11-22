@@ -1,0 +1,14 @@
+{
+    "topics": [
+        {
+            "title": "Formal Languages",
+            "content": "Formal languages are sets of strings defined over an alphabet...",
+            "examples": ["Example 1: {a^n b^n | n ≥ 0}", "Example 2: L = {w | w has equal 0's and 1's}"]
+        },
+        {
+            "title": "Automata",
+            "content": "Automata are abstract machines for recognizing languages...",
+            "examples": ["DFA for L = {w | w ends in 01}", "NFA for L = {w | w contains substring 'abc'}"]
+        }
+    ]
+}
