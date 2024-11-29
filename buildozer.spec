@@ -2,7 +2,10 @@
 
 # (str) Title of your application
 title = Vidya
+
+title = Vidya
 # (str) Package name
+package.name = vidya
 package.name = vidya
 
 # (str) Package domain (needed for android/ios packaging)
@@ -12,6 +15,7 @@ package.domain = org.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
+source.include_exts = py,png,jpg,kv,atlas
 source.include_exts = py,png,jpg,kv,atlas
 
 # (list) List of inclusions using pattern matching
@@ -36,6 +40,8 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
+requirements = python3,kivy,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow
+
 requirements = = python3,
     kivy,
     https://github.com/kivymd/KivyMD/archive/master.zip,
@@ -47,9 +53,11 @@ requirements = = python3,
 # requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
+#presplash.filename = %(source.dir)s/content/Media_512.jpg
 presplash.filename = %(source.dir)s/content/Media_512.jpg
 
 # (str) Icon of the application
+#icon.filename = %(source.dir)s/content/Media256.jpg
 icon.filename = %(source.dir)s/content/Media256.jpg
 
 # (list) Supported orientations
@@ -70,6 +78,7 @@ orientation = portrait
 osx.python_version = 3
 
 # Kivy version to use
+osx.kivy_version = 1.9.1
 osx.kivy_version = 1.9.1
 
 #
@@ -139,6 +148,7 @@ fullscreen = 0
 # agreements. This is intended for automation only. If set to False,
 # the default, you will be shown the license when first running
 # buildozer.
+# android.accept_sdk_license = True
 # android.accept_sdk_license = True
 
 # (str) Android entry point, default is ok for Kivy-based app
