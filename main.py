@@ -217,12 +217,8 @@ class FormalLanguagesApp(App):
         detail_screen.ids.content.text = content
         self.root.current = 'detail'
     
-    # def set_formalLanguage_detail(self, title, content):
-    #     """Update Formal Language with the topic content."""
-    #     detail_screen = self.root.get_screen('detail')
-    #     detail_screen.ids.title.text = title
-    #     detail_screen.ids.content.text = content
-    #     self.root.current = 'detail'
+        
+
     
 if __name__ == "__main__":
     FormalLanguagesApp().run()
