@@ -1,11 +1,10 @@
 [app]
 
-# (str) Title of your application
+# (str) Title of your application 
 title = Vidya
 
 title = Vidya
 # (str) Package name
-package.name = vidya
 package.name = vidya
 
 # (str) Package domain (needed for android/ios packaging)
@@ -15,7 +14,6 @@ package.domain = org.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
 source.include_exts = py,png,jpg,kv,atlas
 
 # (list) List of inclusions using pattern matching
@@ -42,22 +40,15 @@ version = 0.1
 # comma separated e.g. requirements = sqlite3,kivy
 requirements = python3,kivy,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow
 
-requirements = = python3,
-    kivy,
-    https://github.com/kivymd/KivyMD/archive/master.zip,
-    materialyoucolor,    exceptiongroup,    asyncgui,    asynckivy,pillow
-
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
 # requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/content/Media_512.jpg
 presplash.filename = %(source.dir)s/content/Media_512.jpg
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/content/Media256.jpg
 icon.filename = %(source.dir)s/content/Media256.jpg
 
 # (list) Supported orientations
