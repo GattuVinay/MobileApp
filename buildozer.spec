@@ -49,7 +49,7 @@ requirements = python3,kivy,https://github.com/kivymd/KivyMD/archive/master.zip,
 presplash.filename = %(source.dir)s/content/Media256.jpg
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/content/Media_512.jpg
+#icon.filename = %(source.dir)s/content/Media_512.jpg
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
