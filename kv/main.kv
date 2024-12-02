@@ -1,22 +1,149 @@
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 20
 
-# HomeScreen: Main menu
+        canvas.before:
+            Rectangle:
+                source: "Backgroung.png"  
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Greate Learning"
+            font_size: 30
+            color: (1, 0, 0, 1) 
+
+        TextInput:
+            id: user_id
+            hint_text: "User ID"
+            multiline: False
+            write_tab: False
+            
+
+        TextInput:
+            id: password
+            hint_text: "Password"
+            multiline: False
+            write_tab: False
+            password: True
+
+        Label:
+            id: login_message
+            text: ""
+            color: (1, 0, 0, 1)  # Red text for errors
+
+        Button:
+            text: "Login"
+            on_press: root.validate_user()
+
+        Button:
+            text: "Exit"
+            on_press: app.stop()
+
+<ProfilePopup@Popup>:
+    title: "User Profile"
+    size_hint: 0.8, 0.6 
+    auto_dismiss: True
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 20
+
+        # Profile Picture
+        FloatLayout:
+            Image:
+                source: 'Profile.png'  
+                size_hint: None, None
+                size: 150, 150
+                allow_stretch: True
+                keep_ratio: True
+                pos_hint: {"center_x": 0.5, "center_y": 0.5} 
+
+        # User Name
+        Label:
+            id: user_name_label
+            text: "[username]" 
+            font_size: 20
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size 
+
+        # Close Button
+        Button:
+            text: "Close"
+            size_hint_y: None
+            height: 40
+            on_press: root.dismiss()
+
 <HomeScreen>:
     BoxLayout:
         orientation: 'vertical'
         spacing: 20
-        padding: 50
-        Label:
-            text: "Learn Automata, Formal Languages, and Grammars"
-            font_size: 24
-        Button:
-            text: "Automata"
-            on_press: app.select_category('automata'); app.root.current = 'automata'
-        Button:
-            text: "Formal Languages"
-            on_press: app.select_category('formal_languages'); app.root.current = 'automata'
-        Button:
-            text: "Grammars"
-            on_press: app.select_category('grammars'); app.root.current = 'automata'
+                
+        canvas.before:
+            Rectangle:
+                source: "Backgroung.png"  
+                pos: self.pos
+                size: self.size
+
+        # Navigation Bar
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 50
+            padding: [10, 5]
+            spacing: 10
+            canvas.before:
+                Color:
+                    rgba: 0.2, 0.6, 0.8, 1  # Light blue background for navigation bar
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                text: "Learning Portal"
+                font_size: 20
+                halign: 'left'
+                valign: 'center'
+                size_hint_x: 0.6
+
+            TextInput:
+                id: global_search
+                hint_text: "Search..."
+                multiline: False
+                size_hint_x: 0.3
+
+            Button:
+                text: "Profile"
+                size_hint_x: 0.1
+                on_press: app.show_profile_popup() 
+
+        # Main Content
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 20
+            padding: 50
+
+            Label:
+                text: "Learn Automata, Formal Languages, and Grammars"
+                font_size: 24
+
+            Button:
+                text: "Automata"
+                on_press: app.select_category('automata'); app.root.current = 'automata'
+            Button:
+                text: "Formal Languages"
+                on_press: app.select_category('formal_languages'); app.root.current = 'formal_languages'
+            Button:
+                text: "Grammars"
+                on_press: app.select_category('grammars'); app.root.current = 'grammars'
+
+            Button:
+                text: "Log out"
+                on_press: app.root.current = 'login'
           
 # Automata Lessons
 <AutomataScreen>:
@@ -140,6 +267,59 @@
             text: "Back to Automata Lessons"
             on_press: app.root.current = 'automata'
 
+<FormalDetailScreen>:
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+        Label:
+            id: title
+            text: "Formal Languages Topic"
+            font_size: 24
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                Label:
+                    id: content
+                    text: "Detailed explanation of the topic will appear here."
+                    font_size: 16
+                    size_hint_y: None
+                    height: self.texture_size[1]
+        Button:
+            text: "Back to Formal Languages Lessons"
+            on_press: app.root.current = 'formal_languages'
+
+<GrammarsDetailScreen>:
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+        Label:
+            id: title
+            text: "Grammar Topic"
+            font_size: 24
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                Label:
+                    id: content
+                    text: "Detailed explanation of the topic will appear here."
+                    font_size: 16
+                    size_hint_y: None
+                    height: self.texture_size[1]
+        Button:
+            text: "Back to Formal Languages Lessons"
+            on_press: app.root.current = 'grammars'
+
+
 
 # Formal Languages Lessons
 <FormalLanguagesScreen>:
@@ -161,27 +341,27 @@
                     text: "1. Introduction to Formal Languages"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formalLanguage_detail("Introduction to Formal Languages", "Formal Languages are mathematical models ...")
+                    on_press: app.set_formal_detail("Introduction to Formal Languages", "Formal Languages are mathematical models ...")
                 Button:
-                    text: "2. Deterministic Finite Automata (DFA)"
+                    text: "2. What is Grammar in Computation?"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formalLanguage_detail("Deterministic Finite Automata (DFA)", "DFAs are ...")
+                    on_press: app.set_formal_detail("Formal Languages", "Formal ...")
                 Button:
-                    text: "3. Nondeterministic Finite Automata (NFA)"
+                    text: "3. Representation of Grammar"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formalLanguage_detail("Nondeterministic Finite Automata (NFA)", "NFAs are ...")
+                    on_press: app.set_formal_detail("Formal Languages", "Formal ...")
                 Button:
-                    text: "4. Pushdown Automata (PDA)"
+                    text: "4. Types of Grammars"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formalLanguage_detail("Pushdown Automata (PDA)", "PDAs extend ...")
+                    on_press: app.set_formal_detail("Formal Languages", "Formal ...")
                 Button:
-                    text: "5. Turing Machines"
+                    text: "5. What is an ambiguous grammar?"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formalLanguage_detail("Turing Machines", "Turing Machines are ...")
+                    on_press: app.set_formal_detail("Formal Languages", "Formal ...")
         BoxLayout:
             size_hint_y: None
             height: 60
@@ -199,7 +379,7 @@
     BoxLayout:
         orientation: 'vertical'
         spacing: 20
-        padding: 50
+        padding: 40
         Label:
             text: "Grammars Lessons"
             font_size: 20
@@ -209,26 +389,31 @@
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
-                Label:
+                Button:
                     text: "1. Introduction to Grammars"
                     size_hint_y: None
                     height: 40
-                Label:
+                    on_press: app.set_gramma_detail("Introduction to Grammars","Grammars.......")
+                Button:
                     text: "2. Regular Grammars"
                     size_hint_y: None
                     height: 40
-                Label:
+                    on_press: app.set_gramma_detail("Regular Grammars","Regular Grammars are........")
+                Button:
                     text: "3. Context-Free Grammars"
                     size_hint_y: None
                     height: 40
-                Label:
+                    on_press: app.set_gramma_detail("Context-Free Grammars","Context-Free.....")
+                Button:
                     text: "4. Derivation Trees"
                     size_hint_y: None
                     height: 40
-                Label:
+                    on_press: app.set_gramma_detail("Derivation Trees","Derivation Trees.........")
+                Button:
                     text: "5. Ambiguity in Grammars"
                     size_hint_y: None
                     height: 40
+                    on_press: app.set_gramma_detail("Ambiguity in Grammars","Ambiguity.........................")
         Button:
             text: "Back to Home"
             on_press: app.root.current = 'home'

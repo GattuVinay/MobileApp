@@ -1,9 +1,22 @@
+from altair import Color
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
+from matplotlib.patches import Rectangle
+from kivy.uix.popup import Popup
+from kivy.uix.popup import Popup
+from kivy.uix.image import Image
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
 
 # Load KV files
 Builder.load_file('kv/main.kv')
+
+USER_DATABASE = {
+    "user1": "password1",
+    "user2": "password2",
+}
 
 class HomeScreen(Screen):
     pass
@@ -32,11 +45,57 @@ class AutomataDetailScreen(Screen):
 
 class FormalLanguageDetailScreen(Screen):
     pass
+
 class FormalPracticeScreen(Screen):
     pass
 
 class FormalDetailScreen(Screen):
     pass
+
+class GrammarsDetailScreen(Screen):
+    pass
+
+class LoginScreen(Screen):
+    def validate_user(self):
+        user_id = self.ids.user_id.text
+        password = self.ids.password.text
+
+        if user_id in USER_DATABASE and USER_DATABASE[user_id] == password:
+            self.ids.login_message.text = "Login successful!"
+            self.manager.current = 'home'
+        else:
+            self.ids.login_message.text = "Invalid user ID or password. Please try again."
+    
+    def change_background_color(self, r, g, b, a):
+        with self.canvas.before:
+            Color(r, g, b, a)
+            Rectangle(pos=self.pos, size=self.size)
+
+class ProfilePopup(Popup):
+    def __init__(self, username="user1", profile_image_path="profile_picture.png", **kwargs):
+        super().__init__(**kwargs)
+        self.title = "User Profile"
+        self.size_hint = (0.5, 0.5)  
+        self.auto_dismiss = True
+
+        # Main layout
+        layout = BoxLayout(orientation='vertical', padding=20, spacing=20)
+
+        # Profile Image
+        profile_image = Image(source=profile_image_path, size_hint=(None, None))
+        layout.add_widget(profile_image)
+
+        # Username Label
+        username_label = Label(text=f"Username: {username}", font_size=20, halign='center', valign='middle')
+        layout.add_widget(username_label)
+
+        # Close Button
+        close_button = Button(text="Close", size_hint_y=None, height=40)
+        close_button.bind(on_press=self.dismiss)
+        layout.add_widget(close_button)
+
+        # Add layout to the popup
+        self.content = layout
 
 class FormalLanguagesApp(App):
     def __init__(self, **kwargs):
@@ -102,6 +161,7 @@ class FormalLanguagesApp(App):
         }
 
         sm = ScreenManager()
+        sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(HomeScreen(name='home'))
         sm.add_widget(LessonsScreen(name='lessons'))
         sm.add_widget(AutomataPracticeScreen(name='automata_practice'))
@@ -111,6 +171,7 @@ class FormalLanguagesApp(App):
         sm.add_widget(GrammarsScreen(name='grammars'))
         sm.add_widget(AutomataDetailScreen(name='detail'))
         sm.add_widget(FormalDetailScreen(name='formal_detail'))
+        sm.add_widget(GrammarsDetailScreen(name='grammar_detail'))
         sm.add_widget(FormalLanguageDetailScreen(name='formal_languages'))
         sm.add_widget(FormalPracticeScreen(name='formallanguage'))
         return sm
@@ -129,6 +190,10 @@ class FormalLanguagesApp(App):
         # Switch to the target screen
         self.root.current = screen_name
 
+    def show_profile_popup(self):
+      profile_popup = ProfilePopup(username="user1", profile_image_path="Profile.png")
+      profile_popup.open()
+    
     def reset_questions(self):
       
         self.current_question_index = 0
@@ -217,6 +282,20 @@ class FormalLanguagesApp(App):
         detail_screen.ids.content.text = content
         self.root.current = 'detail'
     
+
+    def set_formal_detail(self, title, content):
+        """Update Formal Details screen with the topic content."""
+        detail_screen = self.root.get_screen('formal_detail')
+        detail_screen.ids.title.text = title
+        detail_screen.ids.content.text = content
+        self.root.current = 'formal_detail'
+        
+    def set_gramma_detail(self, title, content):
+        """Update Gamma Details screen with the topic content."""
+        detail_screen = self.root.get_screen('grammar_detail')
+        detail_screen.ids.title.text = title
+        detail_screen.ids.content.text = content
+        self.root.current = 'grammar_detail'
         
 
     
