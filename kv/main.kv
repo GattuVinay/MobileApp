@@ -110,12 +110,7 @@
                 valign: 'center'
                 size_hint_x: 0.6
 
-            TextInput:
-                id: global_search
-                hint_text: "Search..."
-                multiline: False
-                size_hint_x: 0.3
-
+            
             Button:
                 text: "Profile"
                 size_hint_x: 0.1
@@ -414,6 +409,13 @@
                     size_hint_y: None
                     height: 40
                     on_press: app.set_gramma_detail("Ambiguity in Grammars","Ambiguity.........................")
-        Button:
-            text: "Back to Home"
-            on_press: app.root.current = 'home'
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            spacing: 10
+            Button:
+                text: "Back to Home"
+                on_press: app.root.current = 'home'
+            Button:
+                text: "Practice"
+                on_press: app.root.current = 'automata_practice'        
