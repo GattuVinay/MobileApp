@@ -4,7 +4,7 @@
 title = Vidya
 
 # (str) Package name
-package.name = myapp
+package.name = learningapp
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.test
@@ -38,7 +38,7 @@ version = 0.1
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 requirements = python3,kivy,https://github.com/kivymd/KivyMD/archive/master.zip,
-    materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow
+    materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow,phonenumbers
 
 
 # (str) Custom source folders for requirements
@@ -138,7 +138,7 @@ fullscreen = 0
 # agreements. This is intended for automation only. If set to False,
 # the default, you will be shown the license when first running
 # buildozer.
-android.accept_sdk_license = True
+#android.accept_sdk_license = False
 
 # (str) Android entry point, default is ok for Kivy-based app
 #android.entrypoint = org.kivy.android.PythonActivity
