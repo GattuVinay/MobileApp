@@ -13,7 +13,7 @@
         Label:
             text: "Greate Learning"
             font_size: 30
-            color: (1, 0, 0, 1) 
+            color: 0, 0, 0, 1
 
         TextInput:
             id: user_id
@@ -60,6 +60,8 @@
                 size: 150, 150
                 allow_stretch: True
                 keep_ratio: True
+                halign: 'center'
+                valign: 'middle'
                 pos_hint: {"center_x": 0.5, "center_y": 0.5} 
 
         # User Name
@@ -119,12 +121,16 @@
         # Main Content
         BoxLayout:
             orientation: 'vertical'
-            spacing: 20
-            padding: 50
+            spacing: 60
+            padding: 20
+            canvas.before:
+                Color:
+                    rgba: 0.2, 0.6, 0.8, 1
 
             Label:
                 text: "Learn Automata, Formal Languages, and Grammars"
                 font_size: 24
+                color: 0, 0, 0, 1
 
             Button:
                 text: "Automata"
@@ -146,9 +152,17 @@
         orientation: 'vertical'
         spacing: 20
         padding: 50
+
+        canvas.before:
+            Rectangle:
+                source: "Backgroung.png"  
+                pos: self.pos
+                size: self.size
+
         Label:
             text: "Automata Lessons"
             font_size: 20
+            color: 0, 0, 0, 1
         ScrollView:
             do_scroll_x: False
             BoxLayout:
@@ -197,11 +211,18 @@
         orientation: 'vertical'
         spacing: 20
         padding: 50
+        canvas.before:
+            Rectangle:
+                source: "Backgroung.png"  
+                pos: self.pos
+                size: self.size
+
         Label:
             id: question_label
             text: "Question will appear here."
             font_size: 20
             halign: 'center'
+            color: 0, 0, 0, 1
         ScrollView:
             do_scroll_x: False
             BoxLayout:
@@ -242,10 +263,16 @@
         orientation: 'vertical'
         spacing: 20
         padding: 50
+        canvas.before:
+            Rectangle:
+                source: "Backgroung.png"  
+                pos: self.pos
+                size: self.size
         Label:
             id: title
             text: "Automata Topic"
             font_size: 24
+            color: 0, 0, 0, 1
         ScrollView:
             do_scroll_x: False
             BoxLayout:
@@ -255,9 +282,10 @@
                 Label:
                     id: content
                     text: "Detailed explanation of the topic will appear here."
-                    font_size: 16
+                    font_size: 18
                     size_hint_y: None
                     height: self.texture_size[1]
+                    color: 0, 0, 0, 1
         Button:
             text: "Back to Automata Lessons"
             on_press: app.root.current = 'automata'
@@ -268,10 +296,16 @@
         orientation: 'vertical'
         spacing: 20
         padding: 50
+        canvas.before:
+            Rectangle:
+                source: "Backgroung.png"  
+                pos: self.pos
+                size: self.size
         Label:
             id: title
             text: "Formal Languages Topic"
             font_size: 24
+            color: 0, 0, 0, 1
         ScrollView:
             do_scroll_x: False
             BoxLayout:
@@ -284,6 +318,7 @@
                     font_size: 16
                     size_hint_y: None
                     height: self.texture_size[1]
+                    color: 0, 0, 0, 1
         Button:
             text: "Back to Formal Languages Lessons"
             on_press: app.root.current = 'formal_languages'
@@ -294,10 +329,16 @@
         orientation: 'vertical'
         spacing: 20
         padding: 50
+        canvas.before:
+            Rectangle:
+                source: "Backgroung.png"  
+                pos: self.pos
+                size: self.size
         Label:
             id: title
             text: "Grammar Topic"
             font_size: 24
+            color: 0, 0, 0, 1
         ScrollView:
             do_scroll_x: False
             BoxLayout:
@@ -307,7 +348,8 @@
                 Label:
                     id: content
                     text: "Detailed explanation of the topic will appear here."
-                    font_size: 16
+                    font_size: 30
+                    color: 0, 0, 0, 1
                     size_hint_y: None
                     height: self.texture_size[1]
         Button:
@@ -323,9 +365,15 @@
         orientation: 'vertical'
         spacing: 20
         padding: 50
+        canvas.before:
+            Rectangle:
+                source: "Backgroung.png"  
+                pos: self.pos
+                size: self.size
         Label:
             text: "Formal Languages Lessons"
             font_size: 20
+            color: 0, 0, 0, 1
         ScrollView:
             do_scroll_x: False
             BoxLayout:
@@ -375,9 +423,15 @@
         orientation: 'vertical'
         spacing: 20
         padding: 40
+        canvas.before:
+            Rectangle:
+                source: "Backgroung.png"  
+                pos: self.pos
+                size: self.size
         Label:
             text: "Grammars Lessons"
             font_size: 20
+            color: 0, 0, 0, 1
         ScrollView:
             do_scroll_x: False
             BoxLayout:
