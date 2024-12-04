@@ -113,10 +113,9 @@
                 size_hint_x: 0.8
 
             Button:
-                text: ""
-                background_normal: 'Profile1.png'
+                text: "Profile"
                 size_hint: None, None   # Set fixed dimensions for a rectangular shape
-                size: 150, 60          # Width and height of the rectangle
+                size: 70, 70          # Width and height of the rectangle
                 on_press: app.show_profile_popup()
 
         # Main Content
@@ -178,58 +177,78 @@
 
         canvas.before:
             Rectangle:
-                source: "Backgroung.png"  
+                source: "Background.png"  
                 pos: self.pos
                 size: self.size
 
         Label:
             text: "Automata Lessons"
-            font_size: 20
+            font_size: 24
+            bold: True
             color: 0, 0, 0, 1
+
         ScrollView:
             do_scroll_x: False
             BoxLayout:
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
+                spacing: 10
+
                 Button:
                     text: "1. Introduction to Automata"
                     size_hint_y: None
-                    height: 40
-                    on_press: app.set_automata_detail("Introduction to Automata", "Automata are mathematical models ...")
+                    height: 50
+                    font_size: 18
+                    on_press: 
+                        app.set_automata_detail("Introduction to Automata","Formal Languages","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+                
                 Button:
                     text: "2. Deterministic Finite Automata (DFA)"
                     size_hint_y: None
-                    height: 40
-                    on_press: app.set_automata_detail("Deterministic Finite Automata (DFA)", "DFAs are ...")
+                    height: 50
+                    font_size: 18
+                    on_press: 
+                        app.set_automata_detail("Deterministic Finite Automata (DFA)","DFAs are...","""A deterministic finite automaton (DFA) is a model of computation. It is a finite state machine that accepts or rejects strings of symbols and only produces a unique computation (or sequence of states) for each input string.""")
+
                 Button:
                     text: "3. Nondeterministic Finite Automata (NFA)"
                     size_hint_y: None
-                    height: 40
-                    on_press: app.set_automata_detail("Nondeterministic Finite Automata (NFA)", "NFAs are ...")
+                    height: 50
+                    font_size: 18
+                    on_press: 
+                        app.set_automata_detail("Nondeterministic Finite Automata (NFA)","NFAs are...","""A nondeterministic finite automaton (NFA) is similar to a DFA, but it allows multiple transitions for a single input symbol and can even proceed without consuming any input.""")
+
                 Button:
                     text: "4. Pushdown Automata (PDA)"
                     size_hint_y: None
-                    height: 40
-                    on_press: app.set_automata_detail("Pushdown Automata (PDA)", "PDAs extend ...")
+                    height: 50
+                    font_size: 18
+                    on_press: 
+                        app.set_automata_detail("Pushdown Automata (PDA)","PDAs extend...","""A pushdown automaton (PDA) is a finite automaton equipped with a stack. It is useful for modeling computations that require a memory of unbounded size but only in a last-in-first-out order.""")
+
                 Button:
                     text: "5. Turing Machines"
                     size_hint_y: None
-                    height: 40
-                    on_press: app.set_automata_detail("Turing Machines", "Turing Machines are ...")
+                    height: 50
+                    font_size: 18
+                    on_press: 
+                        app.set_automata_detail("Turing Machines","Turing Machines are...","""A Turing machine is a mathematical model of computation that defines an abstract machine.Despite its simplicity, it is capable of simulating any computer algorithm.""")
+
         BoxLayout:
             size_hint_y: None
             height: 60
             spacing: 750
+
             Button:
                 text: ""
                 background_normal: 'back_arrow.png' 
                 size_hint: None, None
-                size: 90, 90
+                size: 70, 70
                 on_press: app.root.current = 'home'
             Button:
                 text: ""
-                background_normal: 'pratice_icon.png'  
+                background_normal: 'practice_icon.png'  
                 size_hint: None, None
                 size: 90, 90
                 on_press: app.root.current = 'automata_practice'
@@ -288,45 +307,83 @@
             text: ""
             background_normal: 'back_arrow.png' 
             size_hint: None, None
-            size: 90, 90
+            size: 70, 70
             on_press: app.refresh_screen('automata')
 
-
 <AutomataDetailScreen>:
-
     BoxLayout:
         orientation: 'vertical'
         spacing: 20
-        padding: 50
+        padding: [30, 20, 30, 20]  # Left, Top, Right, Bottom padding
+
         canvas.before:
             Rectangle:
-                source: "Backgroung.png"  
+                source: "Background.png"  
                 pos: self.pos
                 size: self.size
+
+        # Title Section
         Label:
-            id: title
+            id: heading_label  # Updated ID
             text: "Automata Topic"
             font_size: 24
+            bold: True
             color: 0, 0, 0, 1
+            halign: "center"
+            valign: "middle"
+            size_hint_y: None
+            height: 40
+
+        # Paragraph Section
+        Label:
+            id: paragraph_heading  # Added ID for paragraph heading
+            text: "Paragraph Heading"
+            font_size: 20
+            bold: True
+            color: 0, 0, 0, 1
+            halign: "center"
+            valign: "middle"
+            size_hint_y: None
+            height: 30
+
+        # Content Section with ScrollView
         ScrollView:
             do_scroll_x: False
+            do_scroll_y: True
+            bar_width: 10
+            bar_color: [0.2, 0.6, 0.8, 0.8]  # Light blue scroll bar color
             BoxLayout:
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
+                padding: 10
+                spacing: 10
+
                 Label:
-                    id: content
+                    id: content_label  # Updated ID
                     text: "Detailed explanation of the topic will appear here."
                     font_size: 18
+                    halign: "justify"
+                    valign: "top"
                     size_hint_y: None
+                    text_size: self.width, None  # Adjust text width to box
                     height: self.texture_size[1]
                     color: 0, 0, 0, 1
-        Button:
-            text: ""
-            background_normal: 'back_arrow.png' 
-            size_hint: None, None
-            size: 90, 90
-            on_press: app.root.current = 'automata'
+
+        # Navigation Button Section
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [0, 10, 0, 10]  # Padding for better alignment
+            spacing: 20
+
+            Button:
+                text: ""
+                background_normal: 'back_arrow.png' 
+                size_hint: None, None
+                size: 70, 70
+                on_press: app.root.current = 'automata'
+
 
 <FormalDetailScreen>:
 
@@ -361,7 +418,7 @@
             text: ""
             background_normal: 'back_arrow.png' 
             size_hint: None, None
-            size: 90, 90
+            size: 70, 70
             on_press: app.root.current = 'formal_languages'
 
            
@@ -399,7 +456,7 @@
             text: ""
             background_normal: 'back_arrow.png' 
             size_hint: None, None
-            size: 90, 90
+            size: 70, 70
             on_press: app.root.current = 'grammars'
 
    
@@ -459,7 +516,7 @@
                 text: ""
                 background_normal: 'back_arrow.png' 
                 size_hint: None, None
-                size: 90, 90
+                size: 70, 70
                 on_press: app.root.current = 'home'
             Button:
                 text: ""
@@ -522,7 +579,7 @@
                 text: ""
                 background_normal: 'back_arrow.png'
                 size_hint: None, None
-                size: 90, 90
+                size: 70, 70
                 on_press: app.root.current = 'home'
             Button:
                 text: ""

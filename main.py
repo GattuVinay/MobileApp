@@ -279,12 +279,22 @@ class FormalLanguagesApp(App):
          screen.ids[option].height = 10
 
     
-    def set_automata_detail(self, title, content):
-        """Update AutomataDetailScreen with the topic content."""
-        detail_screen = self.root.get_screen('detail')
-        detail_screen.ids.title.text = title
-        detail_screen.ids.content.text = content
-        self.root.current = 'detail'
+    def set_automata_detail(self, chapter_heading, paragraph_heading, content):
+     try:
+         # Get the detail screen
+         detail_screen = self.root.get_screen('detail')
+         
+         # Set the text for heading, paragraph, and content
+         detail_screen.ids.heading_label.text = chapter_heading
+         detail_screen.ids.paragraph_heading.text = paragraph_heading
+         detail_screen.ids.content_label.text = content
+ 
+         # Navigate to the detail screen
+         self.root.current = 'detail'
+     except KeyError as e:
+         print(f"Error: ID not found in KV file - {e}")
+     except AttributeError as e:
+         print(f"Error: Attribute issue - {e}")
     
 
     def set_formal_detail(self, title, content):
