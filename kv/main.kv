@@ -136,7 +136,7 @@
 
             Button:
                 text: "Profile"
-                size_hint: None, None   # Set fixed dimensions for a rectangular shape
+                size_hint: 0.45, 0.9
                 size: 70, 70          # Width and height of the rectangle
                 on_press: app.show_profile_popup()
 
@@ -148,8 +148,8 @@
 
             GridLayout:
                 cols: 3  # Three columns for icons
-                spacing: 100
-                padding: [60, 20]
+                spacing: 120
+                padding: [100, 20]
                 size_hint_y: None
                 height: 200
 
@@ -583,21 +583,21 @@
                 size_hint_y: None
                 height: self.minimum_height
                 Button:
-                    text: "1. Introduction to Formal Languages"
+                    text: "1. Chapter 1"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+                    on_press: app.set_formal_detail("Formal Languages","1.1 Strings","""We formally define an alphabet as a non-empty finite set. We normally use the symbols a, b, c, . . . with or without subscripts or 0, 1, 2, . . ., etc. for the elements of an alphabet. A string over an alphabet Σ is a finite sequence of symbols of Σ. Although one writes a sequence as (a1, a2, . . . , an), in the present context, we prefer to write it as a1a2 · · · an, i.e. by juxtaposing the symbols in that order. Thus, a string is also known as a word or a sentence. Normally, we use lower case letters towards the end of English alphabet, namely z, y, x, w, etc., to denote strings. Example 2.1.1. Let Σ = {a, b} be an alphabet; then aa, ab, bba, baaba, . . . are some examples of strings over Σ. Since the empty sequence is a finite sequence, it is also a string. Which is ( ) in earlier notation; but with the notation adapted for the present context we require a special symbol. We use ε, to denote the empty string. The set of all strings over an alphabet Σ is denoted by Σ∗. For example, if Σ = {0, 1}, then Σ∗ = {ε, 0, 1, 00, 01, 10, 11, 000, 001, . . .}. Although the set Σ∗ is infinite, it is a countable set. In fact, Σ∗ is countably infinite for any alphabet Σ. In order to understand some such fundamen- tal facts we introduce some string operations, which in turn are useful to manipulate and generate strings. One of the most fundamental operations used for string manipulation is concatenation. Let x = a1a2 · · · an and y = b1b2 · · · bm be two strings. The concatenation of the pair x, y denoted by xy is the string a1a2 · · · anb1b2 · · · bm. Clearly, the binary operation concatenation on Σ∗ is associative, i.e., for all x, y, z ∈ Σ∗, x(yz) = (xy)z. Thus, x(yz) may simply be written as xyz. Also, since ε is the empty string, it satisfies the property εx = xε = x for any sting x ∈ Σ∗. Hence, Σ∗ is a monoid with respect to concatenation. The operation concatenation is not commutative on Σ∗. For a string x and an integer n ≥ 0, we write xn+1 = xnx with the base condition x0 = ε. That is, xn is obtained by concatenating n copies of x. Also, whenever n = 0, the string x1 · · · xn represents the empty string ε. Let x be a string over an alphabet Σ. For a ∈ Σ, the number of occur- rences of a in x shall be denoted by |x|a. The length of a string x denoted by |x| is defined as |x| =	|x|a. a∈Σ Essentially, the length of a string is obtained by counting the number of symbols in the string. For example, |aab| = 3, |a| = 1. Note that |ε| = 0. If we denote An to be the set of all strings of length n over Σ, then one can easily ascertain that Σ∗ =	An. n≥0 And hence, being An a finite set, Σ∗ is a countably infinite set.We say that x is a substring of y if x occurs in y, that is y = uxv for some strings u and v. The substring x is said to be a prefix of y if u = ε. Similarly, x is a suffix of y if v = ε.Generalizing the notation used for number of occurrences of symbol a in a string x, we adopt the notation |y|x as the number of occurrences of a string x in y.""")
                 Button:
-                    text: "2. What is Grammar in Computation?"
+                    text: "2. Languages"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+                    on_press: app.set_formal_detail("Languages","We have got acquainted with the formal notion of strings that are basic elements of a language. In order to define the notion of a language in a broad spectrum, it is felt that it can be any collection of strings over an alphabet. Thus we define a language over an alphabet Σ as a subset of Σ∗. ","""Example 2.2.1. 1.	The emptyset ∅ is a language over any alphabet. Similarly, {ε} is also a language over any alphabet. 2.	The set of all strings over {0, 1} that start with 0. 3.	The set of all strings over {a, b, c} having ac as a substring. Remark 2.2.2. Note that ∅ /= {ε}, because the language ∅ does not contain any string but {ε} contains a string, namely ε. Also it is evident that |∅| = 0; whereas, |{ε}| = 1. Since languages are sets, we can apply various well known set operations such as union, intersection, complement, difference on languages. The notion of concatenation of strings can be extended to languages as follows. The concatenation of a pair of languages L1, L2 is 1L2 = {xy | x ∈ L1 ∧ y ∈ L2}. Example 2.2.3. 1.	If L1 = {0, 1, 01} and L2 = {1, 00}, then L1L2 = {01, 11, 011, 000, 100, 0100}. 2.	For L1 = {b, ba, bab} and L2 = {ε, b, bb, abb}, we have L1L2 = {b, ba, bb, bab, bbb, babb, baabb, babbb, bababb}. Remark 2.2.4. 1.	Since concatenation of strings is associative, so is the concatenation of languages. That is, for all languages L1, L2 and L3, (L1L2)L3 = L1(L2L3). Hence, (L1L2)L3 may simply be written as L1L2L3. 2.	The number of strings in L1L2 is always less than or equal to the product of individual numbers, i.e. |L1L2| ≤ |L1||L2|.3.	L1 ⊆ L1L2 if and only if ε ∈ L2. Proof. The “if part” is straightforward; for instance, if ε ∈ L2, then for any x ∈ L1, we have x = xε ∈ L1L2. On the other hand, suppose ε ∈/ L2. Now, note that a string x ∈ L1 of shortest length in L1 cannot be in L1L2. This is because, if x = yz for some y ∈ L1 and a nonempty string z ∈ L2, then |y| < |x|. A contradiction to our assumption that x is of shortest length in L1. Hence L1 /⊆ L1L2. 4.	Similarly, ε ∈ L1 if and only if L2 ⊆ L1L2. We write Ln to denote the language which is obtained by concatenating n copies of L. More formally, L0 = {ε} and Ln = Ln−1L, for n ≥ 1.In the context of formal languages, another important operation is Kleene star. Kleene star or Kleene closure of a language L, denoted by L∗, is defined as L∗ =	Ln. n≥0 """)
 
                 Button:
-                    text: "3. Representation of Grammar"
+                    text: "3. Finite Representation"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+                    on_press: app.set_formal_detail("Finite Representation","Regular Expressions.","""We now consider the class of languages obtained by applying union, con- catenation, and Kleene star for finitely many times on the basis elements. These languages are known as regular languages and the corresponding finite representations are known as regular expressions. Definition 2.4.1 (Regular Expression). We define a regular expression over an alphabet Σ recursively as follows. 1.	∅, ε, and a, for each a ∈ Σ, are regular expressions representing the languages ∅, {ε}, and {a}, respectively. 2.	If r and s are regular expressions representing the languages R and S, respectively, then so are (a)	(r + s) representing the language R ∪ S, (b)	(rs) representing the language RS, and (c)	(r∗) representing the language R∗. In a regular expression we keep a minimum number of parenthesis which are required to avoid ambiguity in the expression. For example, we may simply write r + st in case of (r + (st)). Similarly, r + s + t for ((r + s) + t).""")
 
                 Button:
                     text: "4. Types of Grammars"
@@ -605,11 +605,11 @@
                     height: 40
                     on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
 
-                Button:
-                    text: "5. What is an ambiguous grammar?"
-                    size_hint_y: None
-                    height: 40
-                    on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+                #Button:
+                #    text: "5. What is an ambiguous grammar?"
+                #    size_hint_y: None
+                #    height: 40
+                #    on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
 
         BoxLayout:
             size_hint_y: None
@@ -653,28 +653,31 @@
                     text: "1. Introduction to Grammars"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_gramma_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+                    on_press: app.set_gramma_detail("Grammars","context-free gram- mar","""In this chapter, we introduce the notion of grammar called context-free gram- mar (CFG) as a language generator. The notion of derivation is instrumental in understanding how the strings are generated in a grammar. We explain the various properties of derivations using a graphical representation called derivation trees. A special case of CFG, viz. regular grammar, is discussed as tool to generate to regular languages. A more general notion of grammars is presented in Chapter 7. In the context of natural languages, the grammar of a language is a set of rules which are used to construct/validate sentences of the language. It has been pointed out, in the introduction of Chapter 2, that this is the third step in a formal learning of a language. Now we draw the attention of a reader to look into the general features of the grammars (of natural languages) to formalize the notion in the present context which facilitate for better under- standing of formal languages. Consider the English sentence. In this process, we observe that two types of words are in the discussion. 1.	The words like the, study, students. 2.	The words like Article, Noun, Verb. The main difference is, if you arrive at a stage where type (1) words are appearing, then you need not say anything more about them. In case you arrive at a stage where you find a word of type (2), then you are assumed to say some more about the word. For example, if the word Article comes, then one should say which article need to be chosen among a, an and the. Let us call the type (1) and type (2) words as terminals and nonterminals, respectively, as per their features. Thus, a grammar should include terminals and nonterminals along with a set of rules which attribute some information regarding nonterminal symbols """)
 
                 Button:
-                    text: "2. Regular Grammars"
+                    text: "2. Derivation Trees"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_gramma_detail("Regular Grammars","Regular Grammars are........","""""")
+                    on_press: app.set_gramma_detail("Derivation Trees","S → S ∗ S | S + S | (S) | a | b","""Figure 3.3 gives three derivations for the string a + b ∗ a. Note that the three derivations are different, because of application of different sequences of rules. Nevertheless, the derivations (1) and (2) share the following feature. A nonterminal that appears at a particular common position in both the derivations derives the same substring of a + b ∗ a in both the derivations. In contrast to that, the derivations (2) and (3) are not sharing such feature. For example, the second S in step 2 of derivations (1) and (2) derives the substring a; whereas, the second S in step 2 of derivation (3) derives the substring b ∗ a. In order to distinguish this feature between the derivations of a string, we introduce a graphical representation of a derivation called derivation tree, which will be a useful tool for several other purposes also. """)
                 Button:
-                    text: "3. Context-Free Grammars"
+                    text: "3. Ambiguity"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_gramma_detail("Context-Free Grammars","Context-Free.....","""""")
+                    on_press: app.set_gramma_detail("Ambiguity","","""Let G be a context-free grammar. It may be a case that the CFG G gives two or more inequivalent derivations for a string x ∈ L(G). This can be identified by their different derivation trees. While deriving the string, if there are multiple possibilities of application of production rules on the same symbol, one may have a difficulty in choosing a correct rule. In the context of compiler which is constructed based on a grammar, this difficulty will lead to an ambiguity in parsing. Thus, a grammar with such a property is said to be ambiguous. Definition 3.2.10. Formally, a CFG G is said to be ambiguous, if G has two different leftmost derivations for some string in L(G). Otherwise, the grammar is said to be unambiguous. """)
                 Button:
-                    text: "4. Derivation Trees"
+                    text: "4. Regular Grammars"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_gramma_detail("Derivation Trees","Derivation Trees.........","""""")
+                    on_press: app.set_gramma_detail("Regular Grammars","CFG G = (N, Σ, P, S) ","Example 3.3.2. The CFGs given in Examples 3.1.8, 3.1.9 and 3.1.11 are clearly linear. Whereas, the CFG given in Example 3.1.12 is not linear. Remark 3.3.3. If G is a linear grammar, then every derivation in G is a leftmost derivation as well as rightmost derivation. This is because there is exactly one nonterminal symbol in the sentential form of each internal step of the derivation.""")
                 Button:
-                    text: "5. Ambiguity in Grammars"
+                    text: "5. Digraph Representation"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_gramma_detail("Ambiguity in Grammars","Ambiguity.........................","""""")
+                    on_press: app.set_gramma_detail("Regular Grammars","CFG G = (N, Σ, P, S) ","Example 3.3.2. The CFGs given in Examples 3.1.8, 3.1.9 and 3.1.11 are clearly linear. Whereas, the CFG given in Example 3.1.12 is not linear. Remark 3.3.3. If G is a linear grammar, then every derivation in G is a leftmost derivation as well as rightmost derivation. This is because there is exactly one nonterminal symbol in the sentential form of each internal step of the derivation.""")
+
+                   # on_press: app.set_gramma_detail("Digraph Representation,"Representation","""We could achieve in writing a right linear grammar for some languages. How- ever, we face difficulties in constructing a right linear grammar for some lan- guages that are known to be regular. We are now going to represent a right linear grammar by a digraph which shall give a better approach in writ- ing/constructing right linear grammar for languages. In fact, this digraph representation motivates one to think about the notion of finite automaton which will be shown, in the next chapter, as an ultimate tool in understanding regular languages. Definition 3.4.1. Given a right linear grammar G = (N, T, P, S), define the digraph (V, E), where the vertex set V = N ∪ {$} with a new symbol $ and the edge set E is formed as follows. 1.	(A, B) ∈ E ⇐⇒ A → xB ∈ P , for some x ∈ T ∗ 2.	(A, $) ∈ E ⇐⇒ A → x ∈ P , for some x ∈ T ∗ In which case, the arc from A to B is labeled by x.""")
+
         BoxLayout:
             size_hint_y: None
             height: 60
