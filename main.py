@@ -14,7 +14,7 @@ from kivy.uix.boxlayout import BoxLayout
 Builder.load_file('kv/main.kv')
 
 USER_DATABASE = {
-    "user1": "password1",
+    "1": "1",
     "user2": "password2",
 }
 
@@ -29,7 +29,6 @@ class AutomataPracticeScreen(Screen):
 
 class QuizScreen(Screen):
     pass
-
 
 class AutomataScreen(Screen):
     pass
@@ -266,14 +265,19 @@ class FormalLanguagesApp(App):
             self.show_final_score()
 
     def show_final_score(self):
-        """Display the final score and disable question options."""
-        screen = self.root.get_screen('automata_practice')
-        final_score_message = f"Quiz complete! Your score: {self.score}/{len(self.questions[self.selected_category])}"
-        screen.ids.question_label.text = final_score_message
+     """Display the final score and hide question options."""
+     screen = self.root.get_screen('automata_practice')
+     final_score_message = f"Quiz complete! Your score: {self.score}/{len(self.questions[self.selected_category])}"
 
-        # Disable the options
-        for option in ['option_a', 'option_b', 'option_c', 'option_d']:
-            screen.ids[option].disabled = True
+     # Update the score label
+     screen.ids.question_label.text  = final_score_message
+
+     # Hide the options
+     for option in ['option_a', 'option_b', 'option_c', 'option_d']:
+         screen.ids[option].opacity = 0
+         screen.ids[option].size_hint_y = None
+         screen.ids[option].height = 10
+
     
     def set_automata_detail(self, title, content):
         """Update AutomataDetailScreen with the topic content."""
