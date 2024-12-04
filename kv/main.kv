@@ -83,7 +83,6 @@
 <HomeScreen>:
     BoxLayout:
         orientation: 'vertical'
-        spacing: 20
                 
         canvas.before:
             Rectangle:
@@ -95,57 +94,81 @@
         BoxLayout:
             orientation: 'horizontal'
             size_hint_y: None
-            height: 50
-            padding: [10, 5]
-            spacing: 10
+            height: 70
+            padding: [10, 10]
+            spacing: 25
             canvas.before:
                 Color:
-                    rgba: 0.2, 0.6, 0.8, 1  # Light blue background for navigation bar
+                    rgba: 0.1, 0.3, 0.6, 1  # Dark blue background for navigation bar
                 Rectangle:
                     pos: self.pos
                     size: self.size
 
             Label:
-                text: "Learning Portal"
-                font_size: 20
+                text: "Dashboard"
+                font_size: 24
+                color: 1, 1, 1, 1
                 halign: 'left'
                 valign: 'center'
-                size_hint_x: 0.6
+                size_hint_x: 0.8
 
-            
             Button:
-                text: "Profile"
-                size_hint_x: 0.1
-                on_press: app.show_profile_popup() 
+                text: ""
+                background_normal: 'Profile1.png'
+                size_hint: None, None   # Set fixed dimensions for a rectangular shape
+                size: 150, 60          # Width and height of the rectangle
+                on_press: app.show_profile_popup()
 
         # Main Content
         BoxLayout:
             orientation: 'vertical'
-            spacing: 60
-            padding: 20
-            canvas.before:
-                Color:
-                    rgba: 0.2, 0.6, 0.8, 1
+            spacing: 125
+            padding: [30, 20]
+
+            GridLayout:
+                cols: 3  # Three columns for icons
+                spacing: 100
+                padding: [60, 20]
+                size_hint_y: None
+                height: 200
+
+                Button:
+                    text: ""
+                    background_normal: 'automata_icon.png'  # Automata icon
+                    size_hint: None, None
+                    size: 150, 150
+                    on_press: app.select_category('automata'); app.root.current = 'automata'
+
+                Button:
+                    text: ""
+                    background_normal: 'formal_languages_icon.png'  # Formal Languages icon
+                    size_hint: None, None
+                    size: 150, 150
+                    on_press: app.select_category('formal_languages'); app.root.current = 'formal_languages'
+
+                Button:
+                    text: ""
+                    background_normal: 'grammars_icon.png'  # Grammars icon
+                    size_hint: None, None
+                    size: 150, 150
+                    on_press: app.select_category('grammars'); app.root.current = 'grammars'
 
             Label:
-                text: "Learn Automata, Formal Languages, and Grammars"
-                font_size: 24
+                text: "Learning Portal"
+                font_size: 28
+                halign: 'center'
+                valign: 'center'
                 color: 0, 0, 0, 1
-
-            Button:
-                text: "Automata"
-                on_press: app.select_category('automata'); app.root.current = 'automata'
-            Button:
-                text: "Formal Languages"
-                on_press: app.select_category('formal_languages'); app.root.current = 'formal_languages'
-            Button:
-                text: "Grammars"
-                on_press: app.select_category('grammars'); app.root.current = 'grammars'
+                size_hint_y: None
+                height: 50
 
             Button:
                 text: "Log out"
+                size_hint: None, None
+                size: 150, 50
+                pos_hint: {'center_x': 0.5}
                 on_press: app.root.current = 'login'
-          
+        
 # Automata Lessons
 <AutomataScreen>:
     BoxLayout:
@@ -197,13 +220,20 @@
         BoxLayout:
             size_hint_y: None
             height: 60
-            spacing: 10
+            spacing: 750
             Button:
-                text: "Back to Home"
+                text: ""
+                background_normal: 'back_arrow.png' 
+                size_hint: None, None
+                size: 90, 90
                 on_press: app.root.current = 'home'
             Button:
-                text: "Practice"
+                text: ""
+                background_normal: 'pratice_icon.png'  
+                size_hint: None, None
+                size: 90, 90
                 on_press: app.root.current = 'automata_practice'
+                 
 
 # Practice Screen
 <AutomataPracticeScreen>:
@@ -255,8 +285,12 @@
                     height: 40
                     on_press: app.check_answer('D')
         Button:
-            text: "Back to Automata Lessons"
+            text: ""
+            background_normal: 'back_arrow.png' 
+            size_hint: None, None
+            size: 90, 90
             on_press: app.refresh_screen('automata')
+
 
 <AutomataDetailScreen>:
 
@@ -288,7 +322,10 @@
                     height: self.texture_size[1]
                     color: 0, 0, 0, 1
         Button:
-            text: "Back to Automata Lessons"
+            text: ""
+            background_normal: 'back_arrow.png' 
+            size_hint: None, None
+            size: 90, 90
             on_press: app.root.current = 'automata'
 
 <FormalDetailScreen>:
@@ -321,8 +358,13 @@
                     height: self.texture_size[1]
                     color: 0, 0, 0, 1
         Button:
-            text: "Back to Formal Languages Lessons"
+            text: ""
+            background_normal: 'back_arrow.png' 
+            size_hint: None, None
+            size: 90, 90
             on_press: app.root.current = 'formal_languages'
+
+           
 
 <GrammarsDetailScreen>:
 
@@ -354,11 +396,13 @@
                     size_hint_y: None
                     height: self.texture_size[1]
         Button:
-            text: "Back to Formal Languages Lessons"
+            text: ""
+            background_normal: 'back_arrow.png' 
+            size_hint: None, None
+            size: 90, 90
             on_press: app.root.current = 'grammars'
 
-
-
+   
 # Formal Languages Lessons
 <FormalLanguagesScreen>:
 
@@ -410,14 +454,19 @@
         BoxLayout:
             size_hint_y: None
             height: 60
-            spacing: 10
+            spacing: 750
             Button:
-                text: "Back to Home"
+                text: ""
+                background_normal: 'back_arrow.png' 
+                size_hint: None, None
+                size: 90, 90
                 on_press: app.root.current = 'home'
             Button:
-                text: "Practice"
+                text: ""
+                background_normal: 'pratice_icon.png' 
+                size_hint: None, None
+                size: 90, 90
                 on_press: app.root.current = 'automata_practice'
-
 
 # Grammars Lessons
 <GrammarsScreen>:
@@ -468,10 +517,19 @@
         BoxLayout:
             size_hint_y: None
             height: 60
-            spacing: 10
+            spacing: 750
             Button:
-                text: "Back to Home"
+                text: ""
+                background_normal: 'back_arrow.png'
+                size_hint: None, None
+                size: 90, 90
                 on_press: app.root.current = 'home'
             Button:
-                text: "Practice"
+                text: ""
+                background_normal:'pratice_icon.png'
+                size_hint: None, None
+                size: 90, 90
                 on_press: app.root.current = 'automata_practice'
+
+
+        
