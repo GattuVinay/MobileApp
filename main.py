@@ -297,19 +297,31 @@ class FormalLanguagesApp(App):
          print(f"Error: Attribute issue - {e}")
     
 
-    def set_formal_detail(self, title, content):
+    def set_formal_detail(self, chapter_heading,paragraph_heading, content):
         """Update Formal Details screen with the topic content."""
-        detail_screen = self.root.get_screen('formal_detail')
-        detail_screen.ids.title.text = title
-        detail_screen.ids.content.text = content
-        self.root.current = 'formal_detail'
+        try:
+            detail_screen =self.root.get_screen('formal_detail')
+            detail_screen.ids.heading_label.text = chapter_heading
+            detail_screen.ids.paragraph_heading.text = paragraph_heading
+            detail_screen.ids.content_label.text = content
+            self.root.current = 'formal_detail'
+        except KeyError as e:
+            print(f"Error: ID not found in KV file - {e}")
+        except AttributeError as e:
+            print(f"Error: Attribute issue - {e}")
         
-    def set_gramma_detail(self, title, content):
+    def set_gramma_detail(self, chapter_heading,paragraph_heading, content):
         """Update Gamma Details screen with the topic content."""
-        detail_screen = self.root.get_screen('grammar_detail')
-        detail_screen.ids.title.text = title
-        detail_screen.ids.content.text = content
-        self.root.current = 'grammar_detail'
+        try:
+            detail_screen = self.root.get_screen('grammar_detail')
+            detail_screen.ids.heading_label.text = chapter_heading
+            detail_screen.ids.paragraph_heading.text = paragraph_heading
+            detail_screen.ids.content_label.text = content
+            self.root.current ='grammar_detail'
+        except KeyError as e:
+            print(f"Error: ID not found in KV file - {e}")
+        except AttributeError as e:
+            print(f"Error: Attribute issue - {e}")
         
 
     

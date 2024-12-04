@@ -1,26 +1,34 @@
 <LoginScreen>:
     BoxLayout:
         orientation: 'vertical'
-        padding: 50
+        padding: [40, 20, 40, 50]  
         spacing: 20
 
         canvas.before:
             Rectangle:
-                source: "Backgroung.png"  
+                source: "image.png" 
                 pos: self.pos
                 size: self.size
 
         Label:
             text: "Greate Learning"
-            font_size: 30
+            font_size: 28
+            bold: True
             color: 0, 0, 0, 1
+            size_hint_y: None
+            height: 50
+            halign: "center"
 
         TextInput:
             id: user_id
             hint_text: "User ID"
+            valign:'center'
             multiline: False
             write_tab: False
-            
+            size_hint_x: 0.8
+            size_hint_y: None
+            height: 50
+            pos_hint: {"center_x": 0.5}
 
         TextInput:
             id: password
@@ -28,18 +36,32 @@
             multiline: False
             write_tab: False
             password: True
+            size_hint_x: 0.8
+            size_hint_y: None
+            height: 50
+            pos_hint: {"center_x": 0.5}
 
         Label:
             id: login_message
             text: ""
             color: (1, 0, 0, 1)  # Red text for errors
+            size_hint_y: None
+            height: 20
 
         Button:
             text: "Login"
+            size_hint_x: 0.6
+            size_hint_y: None
+            height: 50
+            pos_hint: {"center_x": 0.5}
             on_press: root.validate_user()
 
         Button:
             text: "Exit"
+            size_hint_x: 0.6
+            size_hint_y: None
+            height: 50
+            pos_hint: {"center_x": 0.5}
             on_press: app.stop()
 
 <ProfilePopup@Popup>:
@@ -244,13 +266,13 @@
                 text: ""
                 background_normal: 'back_arrow.png' 
                 size_hint: None, None
-                size: 70, 70
+                size: 90, 70
                 on_press: app.root.current = 'home'
             Button:
                 text: ""
                 background_normal: 'practice_icon.png'  
                 size_hint: None, None
-                size: 90, 90
+                size: 70, 70
                 on_press: app.root.current = 'automata_practice'
                  
 
@@ -307,7 +329,7 @@
             text: ""
             background_normal: 'back_arrow.png' 
             size_hint: None, None
-            size: 70, 70
+            size: 90, 70
             on_press: app.refresh_screen('automata')
 
 <AutomataDetailScreen>:
@@ -381,45 +403,83 @@
                 text: ""
                 background_normal: 'back_arrow.png' 
                 size_hint: None, None
-                size: 70, 70
+                size: 90, 70
                 on_press: app.root.current = 'automata'
 
 
 <FormalDetailScreen>:
-
     BoxLayout:
         orientation: 'vertical'
         spacing: 20
-        padding: 50
+        padding: [30, 20, 30, 20]  # Left, Top, Right, Bottom padding
+
         canvas.before:
             Rectangle:
-                source: "Backgroung.png"  
+                source: "Background.png"  
                 pos: self.pos
                 size: self.size
+
+        # Title Section
         Label:
-            id: title
+            id: heading_label  # Updated ID
             text: "Formal Languages Topic"
             font_size: 24
+            bold: True
             color: 0, 0, 0, 1
+            halign: "center"
+            valign: "middle"
+            size_hint_y: None
+            height: 40
+
+        # Paragraph Section
+        Label:
+            id: paragraph_heading  # Added ID for paragraph heading
+            text: "Paragraph Heading"
+            font_size: 20
+            bold: True
+            color: 0, 0, 0, 1
+            halign: "center"
+            valign: "middle"
+            size_hint_y: None
+            height: 30
+
+        # Content Section with ScrollView
         ScrollView:
             do_scroll_x: False
+            do_scroll_y: True
+            bar_width: 10
+            bar_color: [0.2, 0.6, 0.8, 0.8]  # Light blue scroll bar color
             BoxLayout:
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
+                padding: 10
+                spacing: 10
+
                 Label:
-                    id: content
+                    id: content_label  # Updated ID
                     text: "Detailed explanation of the topic will appear here."
-                    font_size: 16
+                    font_size: 18
+                    halign: "justify"
+                    valign: "top"
                     size_hint_y: None
+                    text_size: self.width, None  # Adjust text width to box
                     height: self.texture_size[1]
                     color: 0, 0, 0, 1
-        Button:
-            text: ""
-            background_normal: 'back_arrow.png' 
-            size_hint: None, None
-            size: 70, 70
-            on_press: app.root.current = 'formal_languages'
+
+        # Navigation Button Section
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [0, 10, 0, 10]  # Padding for better alignment
+            spacing: 20
+
+            Button:
+                text: ""
+                background_normal: 'back_arrow.png' 
+                size_hint: None, None
+                size: 90, 70
+                on_press: app.root.current = 'formal_languages'
 
            
 
@@ -428,36 +488,75 @@
     BoxLayout:
         orientation: 'vertical'
         spacing: 20
-        padding: 50
+        padding: [30, 20, 30, 20]  # Left, Top, Right, Bottom padding
+
         canvas.before:
             Rectangle:
-                source: "Backgroung.png"  
+                source: "Background.png"  
                 pos: self.pos
                 size: self.size
+
+        # Title Section
         Label:
-            id: title
-            text: "Grammar Topic"
+            id: heading_label  # Updated ID
+            text: "Grammars Topic"
             font_size: 24
+            bold: True
             color: 0, 0, 0, 1
+            halign: "center"
+            valign: "middle"
+            size_hint_y: None
+            height: 40
+
+        # Paragraph Section
+        Label:
+            id: paragraph_heading  # Added ID for paragraph heading
+            text: "Paragraph Heading"
+            font_size: 20
+            bold: True
+            color: 0, 0, 0, 1
+            halign: "center"
+            valign: "middle"
+            size_hint_y: None
+            height: 30
+
+        # Content Section with ScrollView
         ScrollView:
             do_scroll_x: False
+            do_scroll_y: True
+            bar_width: 10
+            bar_color: [0.2, 0.6, 0.8, 0.8]  # Light blue scroll bar color
             BoxLayout:
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
+                padding: 10
+                spacing: 10
+
                 Label:
-                    id: content
+                    id: content_label  # Updated ID
                     text: "Detailed explanation of the topic will appear here."
-                    font_size: 30
-                    color: 0, 0, 0, 1
+                    font_size: 18
+                    halign: "justify"
+                    valign: "top"
                     size_hint_y: None
+                    text_size: self.width, None  # Adjust text width to box
                     height: self.texture_size[1]
-        Button:
-            text: ""
-            background_normal: 'back_arrow.png' 
-            size_hint: None, None
-            size: 70, 70
-            on_press: app.root.current = 'grammars'
+                    color: 0, 0, 0, 1
+
+        # Navigation Button Section
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [0, 10, 0, 10]  # Padding for better alignment
+            spacing: 20
+
+            Button:
+                text: ""
+                background_normal: 'back_arrow.png' 
+                size_hint: None, None
+                size: 90, 70
+                on_press: app.root.current = 'grammars'
 
    
 # Formal Languages Lessons
@@ -487,27 +586,31 @@
                     text: "1. Introduction to Formal Languages"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formal_detail("Introduction to Formal Languages", "Formal Languages are mathematical models ...")
+                    on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
                 Button:
                     text: "2. What is Grammar in Computation?"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formal_detail("Formal Languages", "Formal ...")
+                    on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+
                 Button:
                     text: "3. Representation of Grammar"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formal_detail("Formal Languages", "Formal ...")
+                    on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+
                 Button:
                     text: "4. Types of Grammars"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formal_detail("Formal Languages", "Formal ...")
+                    on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+
                 Button:
                     text: "5. What is an ambiguous grammar?"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_formal_detail("Formal Languages", "Formal ...")
+                    on_press: app.set_formal_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+
         BoxLayout:
             size_hint_y: None
             height: 60
@@ -516,13 +619,13 @@
                 text: ""
                 background_normal: 'back_arrow.png' 
                 size_hint: None, None
-                size: 70, 70
+                size: 90, 70
                 on_press: app.root.current = 'home'
             Button:
                 text: ""
-                background_normal: 'pratice_icon.png' 
+                background_normal: 'practice_icon.png'  
                 size_hint: None, None
-                size: 90, 90
+                size: 70, 70
                 on_press: app.root.current = 'automata_practice'
 
 # Grammars Lessons
@@ -550,27 +653,28 @@
                     text: "1. Introduction to Grammars"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_gramma_detail("Introduction to Grammars","Grammars.......")
+                    on_press: app.set_gramma_detail("Introduction to Formal Languages","Formal Languages are mathematical models ...","""A language can be seen as a system suitable for expression of certain ideas, facts, and concepts.For formalizing the notion of a language, one must cover all varieties of languages, such as natural (human) languages and programming languages. Let us look at some common features across the languages. One may broadly see that a language is a collection of sentences;a sentence is a sequence of words; and a word is a combination of syllables. If one considers a language that has a script, then it can be observed that a word is a sequence of symbols of its underlying alphabet. It is observed that a formal learning of a language has the following three steps.""")
+
                 Button:
                     text: "2. Regular Grammars"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_gramma_detail("Regular Grammars","Regular Grammars are........")
+                    on_press: app.set_gramma_detail("Regular Grammars","Regular Grammars are........","""""")
                 Button:
                     text: "3. Context-Free Grammars"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_gramma_detail("Context-Free Grammars","Context-Free.....")
+                    on_press: app.set_gramma_detail("Context-Free Grammars","Context-Free.....","""""")
                 Button:
                     text: "4. Derivation Trees"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_gramma_detail("Derivation Trees","Derivation Trees.........")
+                    on_press: app.set_gramma_detail("Derivation Trees","Derivation Trees.........","""""")
                 Button:
                     text: "5. Ambiguity in Grammars"
                     size_hint_y: None
                     height: 40
-                    on_press: app.set_gramma_detail("Ambiguity in Grammars","Ambiguity.........................")
+                    on_press: app.set_gramma_detail("Ambiguity in Grammars","Ambiguity.........................","""""")
         BoxLayout:
             size_hint_y: None
             height: 60
@@ -579,13 +683,13 @@
                 text: ""
                 background_normal: 'back_arrow.png'
                 size_hint: None, None
-                size: 70, 70
+                size: 90, 70
                 on_press: app.root.current = 'home'
             Button:
                 text: ""
-                background_normal:'pratice_icon.png'
+                background_normal: 'practice_icon.png'
                 size_hint: None, None
-                size: 90, 90
+                size: 70, 70
                 on_press: app.root.current = 'automata_practice'
 
 
