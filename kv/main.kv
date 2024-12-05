@@ -275,17 +275,15 @@
                 size: 70, 70
                 on_press: app.root.current = 'automata_practice'
                  
-
 # Practice Screen
 <AutomataPracticeScreen>:
     BoxLayout:
         orientation: 'vertical'
         spacing: 20
         padding: 50
-        color: 0, 0, 0, 1
         canvas.before:
             Rectangle:
-                source: "Backgroung.png"  
+                source: "Backgroung.png"
                 pos: self.pos
                 size: self.size
 
@@ -295,6 +293,7 @@
             font_size: 20
             halign: 'center'
             color: 0, 0, 0, 1
+
         ScrollView:
             do_scroll_x: False
             BoxLayout:
@@ -325,9 +324,10 @@
                     size_hint_y: None
                     height: 40
                     on_press: app.check_answer('D')
+
         Button:
             text: ""
-            background_normal: 'back_arrow.png' 
+            background_normal: 'back_arrow.png'
             size_hint: None, None
             size: 90, 70
             on_press: app.refresh_screen('automata')
@@ -406,7 +406,6 @@
                 size: 90, 70
                 on_press: app.root.current = 'automata'
 
-
 <FormalDetailScreen>:
     BoxLayout:
         orientation: 'vertical'
@@ -481,7 +480,6 @@
                 size: 90, 70
                 on_press: app.root.current = 'formal_languages'
 
-           
 
 <GrammarsDetailScreen>:
 
@@ -562,6 +560,7 @@
 # Formal Languages Lessons
 <FormalLanguagesScreen>:
 
+
     BoxLayout:
         orientation: 'vertical'
         spacing: 20
@@ -626,7 +625,61 @@
                 background_normal: 'practice_icon.png'  
                 size_hint: None, None
                 size: 70, 70
-                on_press: app.root.current = 'automata_practice'
+                on_press: app.root.current = 'formalpraticescreen'
+
+<FormalPracticeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+        canvas.before:
+            Rectangle:
+                source: "Backgroung.png"
+                pos: self.pos
+                size: self.size
+
+        Label:
+            id: question_label
+            text: "Question will appear here."
+            font_size: 20
+            halign: 'center'
+            color: 0, 0, 0, 1
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                Button:
+                    id: option_a
+                    text: "Option A"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('A')
+                Button:
+                    id: option_b
+                    text: "Option B"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('B')
+                Button:
+                    id: option_c
+                    text: "Option C"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('C')
+                Button:
+                    id: option_d
+                    text: "Option D"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('D',)
+        Button:
+            text: ""
+            background_normal: 'back_arrow.png'
+            size_hint: None, None
+            size: 90, 70
+            on_press: app.refresh_screen('formal_languages')
 
 # Grammars Lessons
 <GrammarsScreen>:
@@ -693,7 +746,105 @@
                 background_normal: 'practice_icon.png'
                 size_hint: None, None
                 size: 70, 70
-                on_press: app.root.current = 'automata_practice'
+                on_press: app.root.current = 'grammarpratice'
+
+
+<GrammarPracticeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+        canvas.before:
+            Rectangle:
+                source: "Background.png"
+                pos: self.pos
+                size: self.size
+
+        Label:
+            id: question_label  # ID matches Python code
+            text: "Question will appear here."
+            font_size: 20
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size
+            color: 0, 0, 0, 1
+        
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                Button:
+                    id: option_a  # ID matches Python code
+                    text: "Option A"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('A')
+                Button:
+                    id: option_b
+                    text: "Option B"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('B')
+                Button:
+                    id: option_c
+                    text: "Option C"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('C')
+                Button:
+                    id: option_d
+                    text: "Option D"
+                    size_hint_y: None
+                    height: 40
+                    on_press: app.check_answer('D')
+
+
+<QuizScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 20
+        Label:
+            id: question_label
+            text: "Question appears here."
+            font_size: 20
+            size_hint_y: None
+            height: 60
+        Button:
+            id: option_a
+            text: "Option A"
+            on_press: app.check_answer('A')
+        Button:
+            id: option_b
+            text: "Option B"
+            on_press: app.check_answer('B')
+        Button:
+            id: option_c
+            text: "Option C"
+            on_press: app.check_answer('C')
+        Button:
+            id: option_d
+            text: "Option D"
+            on_press: app.check_answer('D')
+
+<ScoreScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 20
+        Label:
+            id: score_label
+            text: "Your Score: 0"
+            font_size: 24
+        Button:
+            text: "Main Menu"
+            on_press:
+                app.reset_quiz()  # Call reset function
+                app.root.current = 'home'
+
+
 
 
         
