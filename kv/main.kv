@@ -746,6 +746,7 @@
                 background_normal: 'practice_icon.png'
                 size_hint: None, None
                 size: 70, 70
+                #on_press: app.root.current = app.display_question('grammars')
                 on_press: app.root.current = 'grammarpratice'
 
 
@@ -799,35 +800,41 @@
                     size_hint_y: None
                     height: 40
                     on_press: app.check_answer('D')
+        Button:
+            text: ""
+            background_normal: 'back_arrow.png'
+            size_hint: None, None
+            size: 90, 70
+            on_press: app.refresh_screen('grammars')
 
 
-<QuizScreen>:
-    BoxLayout:
-        orientation: 'vertical'
-        spacing: 20
-        padding: 20
-        Label:
-            id: question_label
-            text: "Question appears here."
-            font_size: 20
-            size_hint_y: None
-            height: 60
-        Button:
-            id: option_a
-            text: "Option A"
-            on_press: app.check_answer('A')
-        Button:
-            id: option_b
-            text: "Option B"
-            on_press: app.check_answer('B')
-        Button:
-            id: option_c
-            text: "Option C"
-            on_press: app.check_answer('C')
-        Button:
-            id: option_d
-            text: "Option D"
-            on_press: app.check_answer('D')
+#<QuizScreen>:
+#    BoxLayout:
+#        orientation: 'vertical'
+#        spacing: 20
+#        padding: 20
+#        Label:
+#            id: question_label
+#            text: "Question appears here."
+#            font_size: 20
+#            size_hint_y: None
+#            height: 60
+#        Button:
+#            id: option_a
+#            text: "Option A"
+#            on_press: app.check_answer('A')
+#        Button:
+#            id: option_b
+#            text: "Option B"
+#            on_press: app.check_answer('B')
+#        Button:
+#            id: option_c
+#            text: "Option C"
+#            on_press: app.check_answer('C')
+#        Button:
+#            id: option_d
+#            text: "Option D"
+#            on_press: app.check_answer('D')
 
 <ScoreScreen>:
     BoxLayout:

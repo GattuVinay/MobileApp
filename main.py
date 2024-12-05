@@ -27,8 +27,8 @@ class LessonsScreen(Screen):
 class AutomataPracticeScreen(Screen):
     pass
 
-class QuizScreen(Screen):
-    pass
+# class QuizScreen(Screen):
+#     pass
 
 class AutomataScreen(Screen):
     pass
@@ -190,14 +190,14 @@ class FormalLanguagesApp(App,Screen):
         sm.add_widget(HomeScreen(name='home'))
         sm.add_widget(LessonsScreen(name='lessons'))
         sm.add_widget(AutomataPracticeScreen(name='automata_practice'))
-        sm.add_widget(QuizScreen(name='quiz'))
+        # sm.add_widget(QuizScreen(name='quiz'))
         sm.add_widget(AutomataScreen(name='automata'))
         sm.add_widget(FormalLanguagesScreen(name='formal_languages'))
         sm.add_widget(GrammarsScreen(name='grammars'))
         sm.add_widget(AutomataDetailScreen(name='detail'))
         sm.add_widget(FormalDetailScreen(name='formal_detail'))
         sm.add_widget(GrammarsDetailScreen(name='grammar_detail'))
-        sm.add_widget(FormalLanguageDetailScreen(name='formal_languages'))
+        # sm.add_widget(FormalLanguageDetailScreen(name='formal_languages'))
         sm.add_widget(FormalPracticeScreen(name='formalpraticescreen'))
         sm.add_widget(GrammarPracticeScreen(name='grammarpratice'))
         sm.add_widget(QuizScreen(name='quiz'))
@@ -208,30 +208,34 @@ class FormalLanguagesApp(App,Screen):
     def on_start(self):
         pass
 
-    def load_question(self):
-      """
-      Load the current question based on the selected category and question index.
-      """
-      category_questions = self.questions[self.selected_category]
+    def display_question(self, screen):
+      # Check if the category (e.g., 'automata') exists in the questions dictionary
+      category = 'automata'  # Replace with the appropriate category based on your logic
+      if category not in self.questions:
+          print(f"Error: Category '{category}' not found in questions.")
+          return
       
-      if self.current_question_index < len(category_questions):
-          # Get the current question
-          question_data = category_questions[self.current_question_index]
-          
-          # Update the question label and options dynamically
-          automata_screen = self.root.get_screen('automata')
-          
-          # Ensure we are updating the ids correctly
-          automata_screen.ids.question_label.text = question_data["question"]
-          automata_screen.ids.option_a.text = f"A. {question_data['options'][0]}"
-          automata_screen.ids.option_b.text = f"B. {question_data['options'][1]}"
-          automata_screen.ids.option_c.text = f"C. {question_data['options'][2]}"
-          automata_screen.ids.option_d.text = f"D. {question_data['options'][3]}"
-          
+      # Get the list of questions for the selected category
+      questions_list = self.questions[category]
+  
+      # Check if the current question index is within the valid range
+      if self.current_question_index < 0 or self.current_question_index >= len(questions_list):
+          print(f"Error: current_question_index ({self.current_question_index}) out of range.")
+          return
+      
+      # Get the specific question data
+      question_data = questions_list[self.current_question_index]
+  
+      # Ensure screen and question_data are available
+      if question_data:
+          screen = self.root.get_screen(screen)
+          screen.ids.question_label.text = question_data["question"]
+          screen.ids.option_a.text = f"A. {question_data['options'][0]}"
+          screen.ids.option_b.text = f"B. {question_data['options'][1]}"
+          screen.ids.option_c.text = f"C. {question_data['options'][2]}"
+          screen.ids.option_d.text = f"D. {question_data['options'][3]}"
       else:
-          # If there are no more questions, navigate to the score screen
-          self.root.current = 'score'
-          self.root.get_screen('score').ids.score_label.text = f"Your Final Score: {self.score}"
+          print("Error: No data found for the current question.")
 
 
 
@@ -247,23 +251,7 @@ class FormalLanguagesApp(App,Screen):
         screen.ids.option_b.text = question_data["options"][1]
         screen.ids.option_c.text = question_data["options"][2]
         screen.ids.option_d.text = question_data["options"][3]
-
-    # def refresh_screen(self, screen_name):
-    #     """Reset the screen based on the selected category."""
-    #     if screen_name == 'automata':
-    #         self.selected_category = 'automata'
-    #         self.reset_questions(screen_name)
-    #         self.root.current = screen_name
-    #     elif screen_name == 'grammars':
-    #         self.selected_category = 'grammars'
-    #         self.reset_questions(screen_name)
-    #         self.root.current = screen_name
-    #     elif screen_name == 'formal_languages':
-    #         self.selected_category = 'formal_languages'
-    #         self.reset_questions(screen_name)
-    #         self.root.current = screen_name
-
-
+    
     def refresh_screen(self, category):
         """
         Refresh the screen by resetting the score and question index.
@@ -272,12 +260,6 @@ class FormalLanguagesApp(App,Screen):
         self.current_question_index = 0
         self.score = 0
         self.load_question()    
-        
-        # # Reset any other states if necessary
-        # self.reset_questions(screen_name)
-
-        # # Switch to the selected screen
-        # self.root.current = screen_name
 
     def show_profile_popup(self):
       profile_popup = ProfilePopup(username="user1", profile_image_path="Profile.png")
@@ -290,7 +272,7 @@ class FormalLanguagesApp(App,Screen):
         self.display_question(screen_name)
          # Reset the Practice Screen elements
         screen = self.root.get_screen('automata_practice')
-        screen.ids.question_label.text = "Question will appear here."
+        screen.ids.question_label.text = "Questions appear here."
         screen.ids.option_a.text = "Option A"
         screen.ids.option_b.text = "Option B"
         screen.ids.option_c.text = "Option C"
@@ -303,15 +285,35 @@ class FormalLanguagesApp(App,Screen):
         # Display the first question again
         self.display_question(screen_name)
 
-    # def display_question(self,):
-       
-    #     question_data = self.questions[self.current_question_index]
-    #     screen = self.root.get_screen('automata_practice')
-    #     screen.ids.question_label.text = question_data["question"]
-    #     screen.ids.option_a.text = f"A. {question_data['options'][0]}"
-    #     screen.ids.option_b.text = f"B. {question_data['options'][1]}"
-    #     screen.ids.option_c.text = f"C. {question_data['options'][2]}"
-    #     screen.ids.option_d.text = f"D. {question_data['options'][3]}" 
+    def display_question(self, screen):
+        # Check if the category exists in the questions dictionary
+        category = 'automata'  # Replace with the appropriate category based on your logic
+        if category not in self.questions:
+            print(f"Error: Category '{category}' not found in questions.")
+            return
+
+        # Get the list of questions for the selected category
+        questions_list = self.questions[category]
+
+        # Check if the current question index is within the valid range
+        if self.current_question_index < 0 or self.current_question_index >= len(questions_list):
+            print(f"Error: current_question_index ({self.current_question_index}) out of range.")
+            return
+
+        # Get the specific question data
+        question_data = questions_list[self.current_question_index]
+
+        # Ensure screen and question_data are available
+        if question_data:
+            screen = self.root.get_screen(screen)
+            screen.ids.question_label.text = question_data["question"]
+            screen.ids.option_a.text = f"A. {question_data['options'][0]}"
+            screen.ids.option_b.text = f"B. {question_data['options'][1]}"
+            screen.ids.option_c.text = f"C. {question_data['options'][2]}"
+            screen.ids.option_d.text = f"D. {question_data['options'][3]}"
+        else:
+            print("Error: No data found for the current question.")
+
     
 
     def select_category(self, category):
@@ -325,74 +327,93 @@ class FormalLanguagesApp(App,Screen):
         self.root.current = 'quiz'
 
     def load_question(self):
-        """
-        Load the current question based on the selected category and question index.
-        """
-        category_questions = self.questions[self.selected_category]
-        if self.current_question_index < len(category_questions):
-            question_data = category_questions[self.current_question_index]
-            quiz_screen = self.root.get_screen('quiz')
-            quiz_screen.ids.question_label.text = question_data["question"]
-            quiz_screen.ids.option_a.text = f"A. {question_data['options'][0]}"
-            quiz_screen.ids.option_b.text = f"B. {question_data['options'][1]}"
-            quiz_screen.ids.option_c.text = f"C. {question_data['options'][2]}"
-            quiz_screen.ids.option_d.text = f"D. {question_data['options'][3]}"
-        else:
-            # All questions attempted, go to the score screen
-            self.root.current = 'score'
-            self.root.get_screen('score').ids.score_label.text = f"Your Final Score: {self.score}"
+      """
+      Load the current question based on the selected category and question index.
+      """
+      # Get the list of questions for the selected category
+      category_questions = self.questions[self.selected_category]
+      
+      # Check if the current question index is within valid range
+      if self.current_question_index < len(category_questions):
+          # Get the question data
+          question_data = category_questions[self.current_question_index]
+          
+          # Determine the screen to display based on selected category
+          if self.selected_category == 'automata':
+              screen_name = 'automata_practice'
+          elif self.selected_category == 'grammars':
+              screen_name = 'grammarpratice'
+          elif self.selected_category == 'formal_languages':
+              screen_name = 'formalpraticescreen'
+          else:
+              print(f"Error: Unknown category '{self.selected_category}'.")
+              return
+  
+          # Get the screen and update its content
+          screen = self.root.get_screen(screen_name)
+          screen.ids.question_label.text = question_data["question"]
+          screen.ids.option_a.text = f"A. {question_data['options'][0]}"
+          screen.ids.option_b.text = f"B. {question_data['options'][1]}"
+          screen.ids.option_c.text = f"C. {question_data['options'][2]}"
+          screen.ids.option_d.text = f"D. {question_data['options'][3]}"
+          
+      else:
+          # All questions attempted, go to the score screen
+          self.root.current = 'score'
+          self.root.get_screen('score').ids.score_label.text = f"Your Final Score: {self.score}"
+  
 
 
-    def display_question(self,screen_name):
-        """Display the current question and options."""
-        # Get the appropriate questions based on selected category
-        question_data = self.questions[self.selected_category][self.current_question_index]
-        screen = screen_name
-        if screen =='automata_practice' :
-         screen = self.root.get_screen('automata_practice') 
-         screen.ids.question_label.text = question_data["question"]
-         screen.ids.option_a.text = f"A. {question_data['options'][0]}"
-         screen.ids.option_b.text = f"B. {question_data['options'][1]}" 
-         screen.ids.option_c.text = f"C. {question_data['options'][2]}"
-         screen.ids.option_d.text = f"D. {question_data['options'][3]}"
-        elif screen =='formal_languages' :
-            screen = self.root.get_screen('formal_languages')
-        elif screen == 'grammars':
-            screen = self.root.get_screen('grammars')
+    # def display_question(self,screen_name):
+    #     """Display the current question and options."""
+    #     # Get the appropriate questions based on selected category
+    #     question_data = self.questions[self.selected_category][self.current_question_index]
+    #     screen = screen_name
+    #     if screen =='automata_practice' :
+    #      screen = self.root.get_screen('automata_practice') 
+    #      screen.ids.question_label.text = question_data["question"]
+    #      screen.ids.option_a.text = f"A. {question_data['options'][0]}"
+    #      screen.ids.option_b.text = f"B. {question_data['options'][1]}" 
+    #      screen.ids.option_c.text = f"C. {question_data['options'][2]}"
+    #      screen.ids.option_d.text = f"D. {question_data['options'][3]}"
+    #     elif screen =='formal_languages' :
+    #         screen = self.root.get_screen('formal_languages')
+    #     elif screen == 'grammars':
+    #         screen = self.root.get_screen('grammars')
 
-        screen.ids.question_label.text = question_data["question"]
-        screen.ids.option_a.text = f"A. {question_data['options'][0]}"
-        screen.ids.option_b.text = f"B. {question_data['options'][1]}"
-        screen.ids.option_c.text = f"C. {question_data['options'][2]}"
-        screen.ids.option_d.text = f"D. {question_data['options'][3]}"
+    #     screen.ids.question_label.text = question_data["question"]
+    #     screen.ids.option_a.text = f"A. {question_data['options'][0]}"
+    #     screen.ids.option_b.text = f"B. {question_data['options'][1]}"
+    #     screen.ids.option_c.text = f"C. {question_data['options'][2]}"
+    #     screen.ids.option_d.text = f"D. {question_data['options'][3]}"
     
 
-    def display_question(self,screen_name):
-        """Display the current question and its options."""
-        if (screen_name == 'automata_practice' ) :
-          question_data = self.questions[self.selected_category][self.current_question_index]
-          screen = self.root.get_screen('automata_practice')
-          screen.ids.question_label.text = question_data["question"]
-          screen.ids.option_a.text = f"A. {question_data['options'][0]}"
-          screen.ids.option_b.text = f"B. {question_data['options'][1]}"
-          screen.ids.option_c.text = f"C. {question_data['options'][2]}"
-          screen.ids.option_d.text = f"D. {question_data['options'][3]}"
-        elif (screen_name == 'grammarpratice') :
-          question_data = self.questions[self.selected_category][self.current_question_index]
-          screen = self.root.get_screen('grammarpratice')
-          screen.ids.question_label.text = question_data["question"]
-          screen.ids.option_a.text = f"A. {question_data['options'][0]}"
-          screen.ids.option_b.text = f"B. {question_data['options'][1]}"
-          screen.ids.option_c.text = f"C. {question_data['options'][2]}"
-          screen.ids.option_d.text = f"D. {question_data['options'][3]}"
-        elif (screen_name == 'formalpraticescreen') :
-          question_data = self.questions[self.selected_category][self.current_question_index]
-          screen = self.root.get_screen('formalpraticescreen')
-          screen.ids.question_label.text = question_data["question"]
-          screen.ids.option_a.text = f"A. {question_data['options'][0]}"
-          screen.ids.option_b.text = f"B. {question_data['options'][1]}"
-          screen.ids.option_c.text = f"C. {question_data['options'][2]}"
-          screen.ids.option_d.text = f"D. {question_data['options'][3]}"
+    # def display_question(self,screen_name):
+    #     """Display the current question and its options."""
+    #     if (screen_name == 'automata_practice' ) :
+    #       question_data = self.questions[self.selected_category][self.current_question_index]
+    #       screen = self.root.get_screen('automata_practice')
+    #       screen.ids.question_label.text = question_data["question"]
+    #       screen.ids.option_a.text = f"A. {question_data['options'][0]}"
+    #       screen.ids.option_b.text = f"B. {question_data['options'][1]}"
+    #       screen.ids.option_c.text = f"C. {question_data['options'][2]}"
+    #       screen.ids.option_d.text = f"D. {question_data['options'][3]}"
+    #     elif (screen_name == 'grammarpratice') :
+    #       question_data = self.questions[self.selected_category][self.current_question_index]
+    #       screen = self.root.get_screen('grammarpratice')
+    #       screen.ids.question_label.text = question_data["question"]
+    #       screen.ids.option_a.text = f"A. {question_data['options'][0]}"
+    #       screen.ids.option_b.text = f"B. {question_data['options'][1]}"
+    #       screen.ids.option_c.text = f"C. {question_data['options'][2]}"
+    #       screen.ids.option_d.text = f"D. {question_data['options'][3]}"
+    #     elif (screen_name == 'formalpraticescreen') :
+    #       question_data = self.questions[self.selected_category][self.current_question_index]
+    #       screen = self.root.get_screen('formalpraticescreen')
+    #       screen.ids.question_label.text = question_data["question"]
+    #       screen.ids.option_a.text = f"A. {question_data['options'][0]}"
+    #       screen.ids.option_b.text = f"B. {question_data['options'][1]}"
+    #       screen.ids.option_c.text = f"C. {question_data['options'][2]}"
+    #       screen.ids.option_d.text = f"D. {question_data['options'][3]}"
 
 
     # def display_question(self, screen_name):
