@@ -16,6 +16,7 @@ Builder.load_file('kv/main.kv')
 USER_DATABASE = {
     "1": "1",
     "user2": "password2",
+    "Admin":"Admin"
 }
 
 class HomeScreen(Screen):
@@ -50,7 +51,7 @@ class FormalPracticeScreen(Screen):
 
 class FormalDetailScreen(Screen):
     pass
-
+    
 class GrammarsDetailScreen(Screen):
     pass
 

@@ -144,49 +144,51 @@
         BoxLayout:
             orientation: 'vertical'
             spacing: 125
-            padding: [30, 20]
+            padding: [20, 20]
 
             GridLayout:
                 cols: 3  # Three columns for icons
-                spacing: 120
-                padding: [100, 20]
+                spacing: 110
+                padding: [80, 40]
                 size_hint_y: None
                 height: 200
 
                 Button:
-                    text: ""
-                    background_normal: 'automata_icon.png'  # Automata icon
+                    background_normal: 'automata_icon.png' 
                     size_hint: None, None
-                    size: 150, 150
+                    size: 200,200
+                    color: 0, 0, 0, 1  # Black text color
                     on_press: app.select_category('automata'); app.root.current = 'automata'
+
 
                 Button:
                     text: ""
                     background_normal: 'formal_languages_icon.png'  # Formal Languages icon
                     size_hint: None, None
-                    size: 150, 150
+                    size: 200,200
                     on_press: app.select_category('formal_languages'); app.root.current = 'formal_languages'
 
                 Button:
                     text: ""
                     background_normal: 'grammars_icon.png'  # Grammars icon
                     size_hint: None, None
-                    size: 150, 150
+                    size: 200,200
                     on_press: app.select_category('grammars'); app.root.current = 'grammars'
 
             Label:
                 text: "Learning Portal"
+
                 font_size: 28
                 halign: 'center'
                 valign: 'center'
-                color: 0, 0, 0, 1
+                color: 1, 0, 0, 1
                 size_hint_y: None
-                height: 50
+                height: 80
 
             Button:
                 text: "Log out"
                 size_hint: None, None
-                size: 150, 50
+                size: 100, 50
                 pos_hint: {'center_x': 0.5}
                 on_press: app.root.current = 'login'
         
@@ -194,20 +196,28 @@
 <AutomataScreen>:
     BoxLayout:
         orientation: 'vertical'
-        spacing: 20
-        padding: 50
+        spacing: 22
+        padding: 40
 
         canvas.before:
-            Rectangle:
-                source: "Background.png"  
-                pos: self.pos
-                size: self.size
+            #Rectangle:
+            #    source: "Background.png"  
+            #    pos: self.pos
+            #    size: self.size
+            Video:
+              source: 'background_video.mp4'  
+              state: 'play'
+              options: {'eos': 'loop'}  # Loop the video
+              size_hint: 1, 1  # Ensure it covers the full screen
+              pos: self.pos  # Position it relative to the layout
+              allow_stretch: True  # Stretch the video to fill the layout
+
 
         Label:
             text: "Automata Lessons"
             font_size: 24
             bold: True
-            color: 0, 0, 0, 1
+            color: 1, 0, 0, 1
 
         ScrollView:
             do_scroll_x: False
@@ -239,7 +249,7 @@
                     height: 50
                     font_size: 18
                     on_press: 
-                        app.set_automata_detail("Nondeterministic Finite Automata (NFA)","NFAs are...","""A nondeterministic finite automaton (NFA) is similar to a DFA, but it allows multiple transitions for a single input symbol and can even proceed without consuming any input.""")
+                        app.set_automata_detail("Nondeterministic Finite Automata (NFA)","NFAs are...","""A nondeterministic finite automaton (NFA) is similar to a DFA, but it allows multiple transitions for a single input  symbol and can even proceed without consuming any input.""")
 
                 Button:
                     text: "4. Pushdown Automata (PDA)"
@@ -272,7 +282,7 @@
                 text: ""
                 background_normal: 'practice_icon.png'  
                 size_hint: None, None
-                size: 70, 70
+                size: 90, 70
                 on_press: app.root.current = 'automata_practice'
                  
 # Practice Screen
