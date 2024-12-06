@@ -440,7 +440,8 @@ class FormalLanguagesApp(App,Screen):
             self.score += 1
         self.current_question_index += 1
         self.load_question()
-    
+
+      
     def set_automata_detail(self, chapter_heading, paragraph_heading, content):
      try:
          # Get the detail screen
