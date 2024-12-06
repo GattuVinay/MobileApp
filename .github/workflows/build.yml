@@ -13,7 +13,9 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y python3 python3-pip git openjdk-11-jdk
-          pip3 install --user buildozer
+          pip3 install --user buildozer cython
+          pip3 install pygame
+          pip3 install setuptools wheel
           export PATH=$PATH:~/.local/bin
 
       - name: Build APK
