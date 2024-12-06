@@ -8,18 +8,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
-      - name: Install Buildozer Dependencies
-        run: sudo apt update && sudo apt install -y buildozer
+
+      - name: Install Buildozer and Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y python3 python3-pip git openjdk-11-jdk
+          pip3 install --user buildozer
+          export PATH=$PATH:~/.local/bin
 
       - name: Build APK
-        uses: digreatbrian/buildozer-action@v2
-        with:
-          python-version: 3.8
-          buildozer-cmd: buildozer -v android clean && buildozer -v android debug
+        run: buildozer -v android debug
 
       - name: Upload APK as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: package-v1.1
+          name: package
           path: ./bin/*.apk
