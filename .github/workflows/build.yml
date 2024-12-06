@@ -1,20 +1,25 @@
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Install Buildozer Dependencies
+        run: sudo apt update && sudo apt install -y buildozer
+
       - name: Build APK
         uses: digreatbrian/buildozer-action@v2
         with:
           python-version: 3.8
-          buildozer-cmd: buildozer -v android_new debug
+          buildozer-cmd: buildozer -v android clean && buildozer -v android debug
 
-      - name: Upload artifacts
+      - name: Upload APK as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: package
+          name: package-v1.1
           path: ./bin/*.apk
