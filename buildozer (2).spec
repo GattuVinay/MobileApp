@@ -1,10 +1,10 @@
 [app]
 
 # (str) Title of your application
-title = Learning
+title = Learning App
 
 # (str) Package name
-package.name = learning
+package.name = myappL
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.test
@@ -29,7 +29,7 @@ source.include_exts = py,png,jpg,kv,atlas
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.2
+version = 0.1
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -38,6 +38,7 @@ version = 0.2
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 requirements = python3,kivy,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow
+
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
