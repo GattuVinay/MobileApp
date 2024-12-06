@@ -396,40 +396,38 @@ class FormalLanguagesApp(App,Screen):
         self.root.current = 'quiz'
 
     def load_question(self):
-      """
-      Load the current question based on the selected category and question index.
-      """
-      # Get the list of questions for the selected category
-      category_questions = self.questions[self.selected_category]
-      
-      # Check if the current question index is within valid range
-      if self.current_question_index < len(category_questions):
-          # Get the question data
-          question_data = category_questions[self.current_question_index]
-          
-          # Determine the screen to display based on selected category
-          if self.selected_category == 'automata':
-              screen_name = 'automata_practice'
-          elif self.selected_category == 'grammars':
-              screen_name = 'grammarpratice'
-          elif self.selected_category == 'formal_languages':
-              screen_name = 'formalpraticescreen'
-          else:
-              print(f"Error: Unknown category '{self.selected_category}'.")
-              return
-  
-          # Get the screen and update its content
-          screen = self.root.get_screen(screen_name)
-          screen.ids.question_label.text = question_data["question"]
-          screen.ids.option_a.text = f"A. {question_data['options'][0]}"
-          screen.ids.option_b.text = f"B. {question_data['options'][1]}"
-          screen.ids.option_c.text = f"C. {question_data['options'][2]}"
-          screen.ids.option_d.text = f"D. {question_data['options'][3]}"
-          
-      else:
-          # All questions attempted, go to the score screen
-          self.root.current = 'score'
-          self.root.get_screen('score').ids.score_label.text = f"Your Final Score: {self.score}"
+        """
+        Load the current question based on the selected category and question index.
+        """
+        category_questions = self.questions[self.selected_category]
+
+        if self.current_question_index < len(category_questions):
+            # Get the question data
+            question_data = category_questions[self.current_question_index]
+
+            if self.selected_category == 'automata':
+                screen_name = 'automata_practice'
+            elif self.selected_category == 'grammars':
+                screen_name = 'grammarpratice'
+            elif self.selected_category == 'formal_languages':
+                screen_name = 'formalpraticescreen'
+            else:
+                print(f"Error: Unknown category '{self.selected_category}'.")
+                return
+
+            screen = self.root.get_screen(screen_name)
+            screen.ids.question_label.text = question_data["question"]
+            screen.ids.option_a.text = f"A. {question_data['options'][0]}"
+            screen.ids.option_b.text = f"B. {question_data['options'][1]}"
+            screen.ids.option_c.text = f"C. {question_data['options'][2]}"
+            screen.ids.option_d.text = f"D. {question_data['options'][3]}"
+
+        else:
+            self.root.current = 'score'
+
+            score_screen = self.root.get_screen('score')
+            score_screen.ids.score_label.text = f"Your Final Score: {self.score}/{len(category_questions)}"
+
   
 
     def check_answer(self, selected_option):
@@ -442,16 +440,6 @@ class FormalLanguagesApp(App,Screen):
             self.score += 1
         self.current_question_index += 1
         self.load_question()
-
-    def show_score(self):
-        # Display the final score
-        screen = self.root
-        screen.ids.question_label.text = f"You scored {self.score}/{len(self.questions[self.selected_category])}!"
-        screen.ids.option_a.text = ""
-        screen.ids.option_b.text = ""
-        screen.ids.option_c.text = ""
-        screen.ids.option_d.text = ""
-
     
     def set_automata_detail(self, chapter_heading, paragraph_heading, content):
      try:

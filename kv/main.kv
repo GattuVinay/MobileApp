@@ -841,16 +841,28 @@
         orientation: 'vertical'
         spacing: 20
         padding: 20
+
+        canvas.before:
+            Rectangle:
+                source: "Background.png"  
+                pos: self.pos
+                size: self.size
+
         Label:
             id: score_label
             text: "Your Score: 0"
+            color:1 ,0 ,0 ,1
             font_size: 24
+        # Call reset function
         Button:
-            text: "Main Menu"
-            on_press:
-                app.reset_quiz()  # Call reset function
-                app.root.current = 'home'
+            text: ""
+            background_normal: 'ScoreIcon.png'
+            size_hint: None, None
+            align:'left'
+            size: 500, 500
+            on_press: app.reset_quiz(); app.root.current = 'home'
 
+        
 
 
 
