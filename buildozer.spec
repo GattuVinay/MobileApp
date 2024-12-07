@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = My Application
+title = Learning Application
 
 # (str) Package name
 package.name = myapp
@@ -37,9 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements= python3,kivy,https://github.com/kivymd/KivyMD/archive/master.zip, 
-    materialyoucolor,exceptiongroup,asyncgui,asynckivy, pillow,altair
-
+requirements = python3,kivy==2.0.0rc4,kivy_garden.graph,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow,altair
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
