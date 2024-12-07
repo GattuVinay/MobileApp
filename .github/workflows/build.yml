@@ -1,27 +1,19 @@
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install Buildozer and Dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y python3 python3-pip git openjdk-11-jdk
-          pip3 install --user buildozer cython
-          pip3 install pygame
-          pip3 install setuptools wheel
-          export PATH=$PATH:~/.local/bin
-
+      - uses: actions/checkout@v4
       - name: Build APK
-        run: buildozer -v android debug
+        uses: digreatbrian/buildozer-action@v2
+        with:
+          python-version: 3.8
+          buildozer-cmd: buildozer -v android debug
 
-      - name: Upload APK as Artifact
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: package
